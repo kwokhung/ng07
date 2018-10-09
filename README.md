@@ -32,3 +32,4 @@ npm run electron
 -> git push -u origin master
 
 npm install --save bootstrap
+ng generate component components/home
