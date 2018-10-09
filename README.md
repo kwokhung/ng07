@@ -30,3 +30,5 @@ npm run electron
 
 5. Push Origin Master
 -> git push -u origin master
+
+npm install --save bootstrap
