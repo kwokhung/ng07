@@ -6,14 +6,18 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+
   @Input() logo: string;
 
   title = 'Expense Voucher Export';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    if (this.logo === undefined || this.logo === null || this.logo === '') {
+      this.logo = './assets/angular.png';
+    }
   }
 
 }
