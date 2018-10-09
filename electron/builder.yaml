@@ -2,6 +2,6 @@ directories:
   output: dist
   buildResources: build
 files:
-  - dist/ng06/*
+  - dist/ng07/*
   - electron/main.js
 electronVersion: 3.0.3
