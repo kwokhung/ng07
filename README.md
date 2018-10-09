@@ -1,27 +1,32 @@
-# Ng07
+npm install -g @angular/cli
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
+ng new ng07
 
-## Development server
+ng serve --open
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+npm install --save-dev electron
+npm install --save-dev electron-builder
+#npm install --save-dev --save-exact electron@latest
+#npm install --save-dev --save-exact electron-builder@latest
 
-## Code scaffolding
+npm run build-electron
+npm run package-electron
+npm run build-electron-aot
+npm run package-electron-aot
+npm run electron
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#npx electron .
+#npx electron-builder build --windows --config electron/builder.yaml
 
-## Build
+1. Init Repo (VSCode)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. Commit Repo (VSCode)
 
-## Running unit tests
+3. Create Repo (GitHub REST API)
+-> curl -u 'kwokhung' https://api.github.com/user/repos -d '{"name":"ng07"}'
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. Remote Add Origin
+-> git remote add origin https://github.com/kwokhung/ng07
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+5. Push Origin Master
+-> git push -u origin master
