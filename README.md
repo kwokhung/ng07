@@ -34,3 +34,4 @@ npm run electron
 npm install --save bootstrap
 ng generate module app-routing --flat --module=app
 ng generate component components/home
+ng generate component components/expense
