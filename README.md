@@ -31,6 +31,8 @@ npm run electron
 5. Push Origin Master
 -> git push -u origin master
 
+npm install --save jquery
+npm install --save popper.js
 npm install --save bootstrap
 ng generate module app-routing --flat --module=app
 ng generate component components/home
