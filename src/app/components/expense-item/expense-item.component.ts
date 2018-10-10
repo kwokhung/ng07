@@ -15,4 +15,8 @@ export class ExpenseItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  click(e) {
+    console.log(e.target.checked);
+    console.log(this.expense.id);
+  }
 }
