@@ -1,14 +1,18 @@
 <li>
-  <div>
-    <span scope="row"> <b>Application Date</b> </span>
-    <span>{{expense.applicationDate}}</span>
-  </div>
-  <div>
-    <span scope="row"> <b>Application No.</b> </span>
-    <span>{{expense.applicationNo}}</span>
-  </div>
-  <div>
-    <span scope="row"> <b>Payee</b> </span>
-    <span>{{expense.payee}}</span>
+  <div class="row">
+    <div class="checkbox col-md-1">
+      <input type="checkbox" value="">
+    </div>
+    <div class="card bg-primary col-md-11">
+      <div class="card-body">
+        <h4 class="card-title"><span>Application No. {{expense.applicationNo}}</span></h4>
+        <div>
+          <span>Application Date {{expense.applicationDate}}</span>
+        </div>
+        <div>
+          <span>Payee {{expense.payee}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </li>

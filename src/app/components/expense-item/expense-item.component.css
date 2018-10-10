@@ -1,6 +1,6 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 li {
     list-style-type: none;
     margin: 5px;
-    border: 1px solid;
-    padding: 5px;
 }

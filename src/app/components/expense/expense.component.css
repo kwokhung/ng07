@@ -7,3 +7,7 @@ label {
 button {
     margin: 10px;
 }
+
+ul {
+    padding: 0;
+}
