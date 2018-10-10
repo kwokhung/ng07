@@ -19,20 +19,20 @@
           <button type="submit" class="btn btn-primary">Search</button>
         </form>
       </div>
-      <div class="col-md-12">
+      <!--div class="col-md-12">
         <label>
           <strong>Search Form</strong>
         </label>
         <pre class="alert alert-dark">{{searchForm.value | json}}</pre>
-      </div>
+      </div-->
     </div>
     <div class="card bg-secondary text-white">
       <div class="card-body">
         <h4 class="card-title">Expense Items</h4>
+        <ul>
+          <app-expense-item [expense]="expense" *ngFor="let expense of expenses"></app-expense-item>
+        </ul>
       </div>
-      <ul>
-        <app-expense-item [expense]="expense" *ngFor="let expense of expenses"></app-expense-item>
-      </ul>
     </div>
   </div>
 </div>
