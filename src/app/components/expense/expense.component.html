@@ -1,28 +1,29 @@
-<div class="container">
-  <div class="card text-center">
-    <div class="card-body">
-      <div class="alert alert-primary" role="alert">
-        <h4>
-          <strong>{{title}}</strong>
-        </h4>
+<div class="card text-center">
+  <div class="card-body">
+    <img [src]="logo">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{title}}</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <form novalidate>
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group ">
+                <label>Model Name</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group ">
+                <label>Color</label>
+                <input type="text" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <img [src]="logo">
-      <h3>Vote Here</h3>
-      <div class="row">
-        <button type="button" class="offset-md-4 col-md-2 btn btn-success" (click)="vote('like')">Yes</button>
-        <button type="button" class="col-md-2 btn btn-danger" (click)="vote('dislike')">No</button>
-      </div>
-      <div class="row" style="margin-top: 10px">
-        <a class="col-md-4 btn btn-warning" href="https://www.ngdevelop.tech/angular-6-features/" role="button">Angular 6
-          Features
-        </a>
-        <a class="col-md-4 btn  btn-warning" href="https://www.ngdevelop.tech/angular/get-started/" role="button">Learn Angular
-          from Scratch</a>
-        <a class="col-md-4 btn  btn-warning" href="https://www.ngdevelop.tech/blog/" role="button">Best Angular Articles</a>
-      </div>
-      <h2>
-        <a class="btn btn-link text-center" href="https://www.ngdevelop.tech/" role="button">www.ngdevelop.tech</a>
-      </h2>
     </div>
   </div>
 </div>
