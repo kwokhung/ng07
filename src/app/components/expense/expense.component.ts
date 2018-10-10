@@ -35,4 +35,7 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
+  export() {
+    alert("exporting...");
+  }
 }
