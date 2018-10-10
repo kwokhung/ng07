@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expense } from '../../models/expense';
 
 @Component({
@@ -9,6 +9,7 @@ import { Expense } from '../../models/expense';
 export class ExpenseItemComponent implements OnInit {
 
   @Input() expense: Expense;
+  @Output() clicked = new EventEmitter<Expense>();
 
   constructor() { }
 
@@ -16,6 +17,8 @@ export class ExpenseItemComponent implements OnInit {
   }
 
   click(e) {
-    alert(`${this.expense.id}: ${e.target.checked ? 'checked' : 'unchecked'}`);
+    //alert(`${this.expense.id}: ${e.target.checked ? 'checked' : 'unchecked'}`);
+    this.expense.selected = (e.target.checked ? true : false);
+    this.clicked.emit(this.expense);
   }
 }
