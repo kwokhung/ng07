@@ -14,6 +14,12 @@ export class MockData {
             'applicationDate': '20181002',
             'applicationNo': 'App-02',
             'payee': '59990'
+        },
+        {
+            'id': 3,
+            'applicationDate': '20181003',
+            'applicationNo': 'App-03',
+            'payee': 'abc'
         }
     ];
 

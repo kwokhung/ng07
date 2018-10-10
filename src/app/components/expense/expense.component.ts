@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Expense } from '../../models/expense';
+import { ExpenseService } from '../../services/expense.service';
 
 @Component({
   selector: 'app-expense',
@@ -16,22 +17,11 @@ export class ExpenseComponent implements OnInit {
   applicationNo: FormControl;
   payee: FormControl;
 
-  expenses: Expense[] = [
-    {
-      'id': 1,
-      'applicationDate': '20181001',
-      'applicationNo': 'App-01',
-      'payee': '16990'
-    },
-    {
-      'id': 2,
-      'applicationDate': '20181002',
-      'applicationNo': 'App-02',
-      'payee': '59990'
-    }
-  ];
+  expenses: Expense[] = [];
 
-  constructor() { }
+  constructor(private expenseService: ExpenseService) {
+    this.expenses = expenseService.getExpenses();
+  }
 
   ngOnInit() {
     this.applicationDate = new FormControl();
