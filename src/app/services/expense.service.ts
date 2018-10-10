@@ -13,7 +13,7 @@ export class ExpenseService {
     this.expenses = MockData.Expenses;
   }
 
-  getExpenses(): Expense[] {
+  getExpenses(criteria: any): Expense[] {
     return this.expenses;
   }
 

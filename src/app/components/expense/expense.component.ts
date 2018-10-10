@@ -20,7 +20,7 @@ export class ExpenseComponent implements OnInit {
   expenses: Expense[] = [];
 
   constructor(private expenseService: ExpenseService) {
-    this.expenses = expenseService.getExpenses();
+    //this.expenses = expenseService.getExpenses({});
   }
 
   ngOnInit() {
@@ -33,6 +33,10 @@ export class ExpenseComponent implements OnInit {
       'applicationNo': this.applicationNo,
       'payee': this.payee
     });
+  }
+
+  search(criteria: any) {
+    this.expenses = this.expenseService.getExpenses(criteria);
   }
 
   clickItem(expense: Expense) {
