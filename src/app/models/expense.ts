@@ -3,4 +3,6 @@ export class Expense {
     applicationDate: string;
     applicationNo: string;
     payee: string;
+    status: string;
+    selected: boolean;
 }
