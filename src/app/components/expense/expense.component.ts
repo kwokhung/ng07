@@ -50,11 +50,16 @@ export class ExpenseComponent implements OnInit {
   export() {
     //alert("exporting...");
 
+    let exported: string = '';
+
     this.expenses.forEach(function (item) {
       if (item.selected) {
         console.log(`${item.id} exported`);
+        exported += `${item.id} exported\r\n`
       }
     });
+
+    alert(exported);
   }
 
 }
