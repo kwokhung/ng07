@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expense } from '../../models/expense';
 
 @Component({
@@ -11,9 +11,19 @@ export class ExpenseItemComponent implements OnInit {
   @Input() expense: Expense;
   @Output() clicked = new EventEmitter<Expense>();
 
-  constructor() { }
+  nativeElement: any;
+
+  constructor(private element: ElementRef) {
+    this.nativeElement = element.nativeElement;
+  }
 
   ngOnInit() {
+    if (this.expense.status === 'Exported') {
+      //console.log(this.nativeElement);
+      //console.log(this.nativeElement.querySelector('.card'));
+      this.nativeElement.querySelector('.card').classList.remove('bg-primary');
+      this.nativeElement.querySelector('.card').classList.add('bg-danger');
+    }
   }
 
   click(e) {
