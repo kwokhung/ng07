@@ -36,11 +36,21 @@ export class ExpenseComponent implements OnInit {
   }
 
   clickItem(expense: Expense) {
-    alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
+    //alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
+
+    this.expenses.forEach(function (item) {
+      console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
+    });
   }
 
   export() {
-    alert("exporting...");
+    //alert("exporting...");
+
+    this.expenses.forEach(function (item) {
+      if (item.selected) {
+        console.log(`${item.id} exported`);
+      }
+    });
   }
 
 }
