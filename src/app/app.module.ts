@@ -8,12 +8,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ExpenseComponent } from './components/expense/expense.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { ExpenseItemComponent } from './components/expense-item/expense-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ExpenseComponent
+    ExpenseComponent,
+    ExpenseItemComponent
   ],
   imports: [
     BrowserModule,

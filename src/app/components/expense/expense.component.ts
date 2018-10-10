@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Expense } from '../../models/expense';
 
 @Component({
   selector: 'app-expense',
@@ -15,6 +16,21 @@ export class ExpenseComponent implements OnInit {
   applicationNo: FormControl;
   payee: FormControl;
 
+  expenses: Expense[] = [
+    {
+      'id': 1,
+      'applicationDate': '20181001',
+      'applicationNo': 'App-01',
+      'payee': '16990'
+    },
+    {
+      'id': 2,
+      'applicationDate': '20181002',
+      'applicationNo': 'App-02',
+      'payee': '59990'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
@@ -24,9 +40,9 @@ export class ExpenseComponent implements OnInit {
 
     this.searchForm = new FormGroup({
       'applicationDate': this.applicationDate,
-      'applicationNo' : this.applicationNo,
-      'payee' : this.payee
+      'applicationNo': this.applicationNo,
+      'payee': this.payee
     });
   }
-  
+
 }
