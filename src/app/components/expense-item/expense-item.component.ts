@@ -16,7 +16,6 @@ export class ExpenseItemComponent implements OnInit {
   }
 
   click(e) {
-    console.log(e.target.checked);
-    console.log(this.expense.id);
+    alert(`${this.expense.id}: ${e.target.checked ? 'checked' : 'unchecked'}`);
   }
 }
