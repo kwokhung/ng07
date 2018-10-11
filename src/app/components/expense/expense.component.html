@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-body">
     <h1 class="card-title text-center">{{title}}</h1>
+    <div class="text-center">
+      <app-loader>Loading...</app-loader>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <form class="form-inline" novalidate [formGroup]="searchForm">
@@ -17,7 +20,6 @@
             <input type="text" class="form-control" formControlName="payee">
           </div>
           <button type="submit" class="btn btn-primary" (click)="search(searchForm.value)">Search</button>
-          <app-loader>Loading...</app-loader>
         </form>
       </div>
       <!--div class="col-md-12">
