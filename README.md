@@ -38,6 +38,8 @@ ng generate module app-routing --flat --module=app
 ng generate component components/home
 ng generate component components/expense
 ng generate component components/expense-item
-ng generate service services/expense --module=app
+ng generate component components/loader
+ng generate service services/expense
+ng generate service services/loader
 ng generate class models/expense
 ng generate class models/mock-data

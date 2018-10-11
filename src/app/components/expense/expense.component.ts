@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Expense } from '../../models/expense';
 import { ExpenseService } from '../../services/expense.service';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-expense',
@@ -19,12 +20,14 @@ export class ExpenseComponent implements OnInit {
 
   expenses: Expense[] = [];
 
-  constructor(private expenseService: ExpenseService) {
+  constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+    this.loaderService.showLoader();
+
     this.expenseService.getAllExpenses()
       .subscribe(
         expenses => {
           this.expenses = expenses;
-          //this.loaderService.hideLoader();
+          this.loaderService.hideLoader();
         }
       );
   }
@@ -42,11 +45,13 @@ export class ExpenseComponent implements OnInit {
   }
 
   search(criteria: any) {
+    this.loaderService.showLoader();
+    
     this.expenseService.getExpenses(criteria)
       .subscribe(
         expenses => {
           this.expenses = expenses;
-          //this.loaderService.hideLoader();
+          this.loaderService.hideLoader();
         }
       );
   }
