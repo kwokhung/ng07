@@ -10,7 +10,7 @@ import { MockData } from '../models/mock-data';
 })
 export class ExpenseService {
 
-  expensesUrl = 'api/expenses';
+  expensesUrl = 'http://localhost:3000/expense/getExpenses';
   expenses: Expense[] = [];
 
   constructor(private httpClient: HttpClient) {
@@ -22,6 +22,8 @@ export class ExpenseService {
   }*/
 
   getExpenses(criteria: any): Observable<Expense[]> {
+    console.log(`criteria: ${JSON.stringify(criteria)}`);
+
     return this.httpClient.get<Expense[]>(this.expensesUrl)
       .pipe(
         tap(expenses => {
