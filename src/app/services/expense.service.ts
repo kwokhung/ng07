@@ -5,6 +5,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expense } from '../models/expense';
 import { MockData } from '../models/mock-data';
 
+interface Criteria {
+  applicationDate: string;
+  applicationNo: string;
+  payee: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,10 +34,10 @@ export class ExpenseService {
       );
   }
 
-  getExpenses(criteria: any): Observable<Expense[]> {
-    console.log(`criteria: ${JSON.stringify(criteria)}`);
+  getExpenses(parameter: Criteria): Observable<Expense[]> {
+    console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, criteria)
+    return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, parameter)
       .pipe(
         tap(expenses => {
           console.log('Expenses fetched...');
@@ -41,10 +47,10 @@ export class ExpenseService {
       );
   }
 
-  requestToExport(criteria: any): Observable<Expense[]> {
-    console.log(`criteria: ${JSON.stringify(criteria)}`);
+  requestToExport(parameter: number[]): Observable<Expense[]> {
+    console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, criteria)
+    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, parameter)
       .pipe(
         tap(result => {
           console.log('Export requested...');
