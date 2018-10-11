@@ -80,9 +80,9 @@ export class ExpenseComponent implements OnInit {
       }
     });
 
-    alert(exported);
-
     this.loaderService.hideLoader();
+
+    alert(exported);
   }
 
   async delay(ms: number) {

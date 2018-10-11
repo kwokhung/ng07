@@ -34,6 +34,7 @@ npm run electron
 npm install --save jquery
 npm install --save popper.js
 npm install --save bootstrap
+npm install --save font-awesome angular-font-awesome
 ng generate module app-routing --flat --module=app
 ng generate component components/home
 ng generate component components/expense
