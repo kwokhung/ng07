@@ -61,24 +61,21 @@ export class ExpenseComponent implements OnInit {
   clickItem(expense: Expense) {
     //alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
 
-    this.expenses.forEach(function (item) {
+    this.expenses.forEach(item => {
       console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
     });
   }
 
   async export() {
     this.loaderService.showLoader();
-    
+
     await this.delay(1000);
 
     let criteria: number[] = [];
 
-    let exported: string = '';
-
-    this.expenses.forEach(function (item) {
+    this.expenses.forEach(item => {
       if (item.selected) {
         console.log(`${item.id} exported`);
-        exported += `${item.id} exported\r\n`
         criteria.push(item.id);
       }
     });
@@ -87,11 +84,15 @@ export class ExpenseComponent implements OnInit {
       .subscribe(
         result => {
           console.log(`result: ${JSON.stringify(result)}`);
-          this.loaderService.hideLoader();
+          this.expenseService.getExpenses(this.searchForm.value)
+            .subscribe(
+              expenses => {
+                this.expenses = expenses;
+                this.loaderService.hideLoader();
+              }
+            );
         }
       );
-
-    this.loaderService.hideLoader();
   }
 
   async delay(ms: number) {
