@@ -17,6 +17,7 @@
             <input type="text" class="form-control" formControlName="payee">
           </div>
           <button type="submit" class="btn btn-primary" (click)="search(searchForm.value)">Search</button>
+          <app-loader>Loading...</app-loader>
         </form>
       </div>
       <!--div class="col-md-12">
@@ -34,6 +35,7 @@
         </ul>
         <div class="text-center">
           <button type="button" class="btn btn-success" (click)="export()">Export</button>
+          <app-loader>Loading...</app-loader>
         </div>
       </div>
     </div>

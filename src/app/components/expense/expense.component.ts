@@ -44,9 +44,11 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
-  search(criteria: any) {
+  async search(criteria: any) {
     this.loaderService.showLoader();
-    
+
+    await this.delay(1000);
+
     this.expenseService.getExpenses(criteria)
       .subscribe(
         expenses => {
@@ -64,8 +66,10 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
-  export() {
-    //alert("exporting...");
+  async export() {
+    this.loaderService.showLoader();
+    
+    await this.delay(1000);
 
     let exported: string = '';
 
@@ -77,6 +81,12 @@ export class ExpenseComponent implements OnInit {
     });
 
     alert(exported);
+
+    this.loaderService.hideLoader();
+  }
+
+  async delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }
