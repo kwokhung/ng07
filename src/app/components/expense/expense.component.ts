@@ -71,7 +71,7 @@ export class ExpenseComponent implements OnInit {
     
     await this.delay(1000);
 
-    this.loaderService.hideLoader();
+    let criteria: number[] = [];
 
     let exported: string = '';
 
@@ -79,10 +79,19 @@ export class ExpenseComponent implements OnInit {
       if (item.selected) {
         console.log(`${item.id} exported`);
         exported += `${item.id} exported\r\n`
+        criteria.push(item.id);
       }
     });
 
-    alert(exported);
+    this.expenseService.requestToExport(criteria)
+      .subscribe(
+        result => {
+          console.log(`result: ${JSON.stringify(result)}`);
+          this.loaderService.hideLoader();
+        }
+      );
+
+    this.loaderService.hideLoader();
   }
 
   async delay(ms: number) {

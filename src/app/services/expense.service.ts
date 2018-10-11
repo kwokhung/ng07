@@ -41,6 +41,19 @@ export class ExpenseService {
       );
   }
 
+  requestToExport(criteria: any): Observable<Expense[]> {
+    console.log(`criteria: ${JSON.stringify(criteria)}`);
+
+    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, criteria)
+      .pipe(
+        tap(result => {
+          console.log('Export requested...');
+          console.log(result);
+        }),
+        catchError(this.handleError<any>('requestToExport', {}))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation}: ${JSON.stringify(error)}`);
