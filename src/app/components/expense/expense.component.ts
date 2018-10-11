@@ -27,7 +27,7 @@ export class ExpenseComponent implements OnInit {
   expenses: Expense[] = [];
 
   constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
-    this.loaderService.showLoader();
+    /*this.loaderService.showLoader();
 
     this.expenseService.getAllExpenses()
       .subscribe(
@@ -35,7 +35,7 @@ export class ExpenseComponent implements OnInit {
           this.expenses = expenses;
           this.loaderService.hideLoader();
         }
-      );
+      );*/
   }
 
   ngOnInit() {
