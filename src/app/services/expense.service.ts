@@ -10,21 +10,28 @@ import { MockData } from '../models/mock-data';
 })
 export class ExpenseService {
 
-  expensesUrl = 'http://localhost:3000/expense/getExpenses';
+  expensesUrl = 'http://localhost:3000/expense';
   expenses: Expense[] = [];
 
   constructor(private httpClient: HttpClient) {
     this.expenses = MockData.Expenses;
   }
 
-  /*getExpenses(criteria: any): Expense[] {
-    return this.expenses;
-  }*/
+  getAllExpenses(): Observable<Expense[]> {
+    return this.httpClient.get<Expense[]>(`${this.expensesUrl}/getAllExpenses`)
+      .pipe(
+        tap(expenses => {
+          console.log('Expenses fetched...');
+          console.log(expenses);
+        }),
+        catchError(this.handleError<Expense[]>('getAllExpenses', MockData.Expenses))
+      );
+  }
 
   getExpenses(criteria: any): Observable<Expense[]> {
     console.log(`criteria: ${JSON.stringify(criteria)}`);
 
-    return this.httpClient.get<Expense[]>(this.expensesUrl)
+    return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, criteria)
       .pipe(
         tap(expenses => {
           console.log('Expenses fetched...');

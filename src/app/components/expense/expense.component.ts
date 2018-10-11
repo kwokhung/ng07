@@ -20,7 +20,13 @@ export class ExpenseComponent implements OnInit {
   expenses: Expense[] = [];
 
   constructor(private expenseService: ExpenseService) {
-    //this.expenses = expenseService.getExpenses({});
+    this.expenseService.getAllExpenses()
+      .subscribe(
+        expenses => {
+          this.expenses = expenses;
+          //this.loaderService.hideLoader();
+        }
+      );
   }
 
   ngOnInit() {
