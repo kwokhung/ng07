@@ -36,7 +36,13 @@ export class ExpenseComponent implements OnInit {
   }
 
   search(criteria: any) {
-    this.expenses = this.expenseService.getExpenses(criteria);
+    this.expenseService.getExpenses(criteria)
+      .subscribe(
+        expenses => {
+          this.expenses = expenses;
+          //this.loaderService.hideLoader();
+        }
+      );
   }
 
   clickItem(expense: Expense) {

@@ -10,6 +10,8 @@ import { ExpenseComponent } from './components/expense/expense.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExpenseItemComponent } from './components/expense-item/expense-item.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { ExpenseItemComponent } from './components/expense-item/expense-item.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
