@@ -4,6 +4,12 @@ import { Expense } from '../../models/expense';
 import { ExpenseService } from '../../services/expense.service';
 import { LoaderService } from '../../services/loader.service';
 
+interface Criteria {
+  applicationDate: string;
+  applicationNo: string;
+  payee: string;
+}
+
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -44,12 +50,12 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
-  async search(criteria: any) {
+  async search(parameter: Criteria) {
     this.loaderService.showLoader();
 
     await this.delay(1000);
 
-    this.expenseService.getExpenses(criteria)
+    this.expenseService.getExpenses(parameter)
       .subscribe(
         expenses => {
           this.expenses = expenses;
@@ -71,16 +77,16 @@ export class ExpenseComponent implements OnInit {
 
     await this.delay(1000);
 
-    let criteria: number[] = [];
+    let parameter: number[] = [];
 
     this.expenses.forEach(item => {
       if (item.selected) {
         console.log(`${item.id} exported`);
-        criteria.push(item.id);
+        parameter.push(item.id);
       }
     });
 
-    this.expenseService.requestToExport(criteria)
+    this.expenseService.requestToExport(parameter)
       .subscribe(
         result => {
           console.log(`result: ${JSON.stringify(result)}`);
