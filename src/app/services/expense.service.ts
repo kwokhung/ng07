@@ -14,7 +14,7 @@ export class ExpenseService {
   expenses: Expense[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.expenses = MockData.Expenses;
+    this.expenses = MockData.expenses;
   }
 
   getAllExpenses(): Observable<Expense[]> {
@@ -24,7 +24,7 @@ export class ExpenseService {
           console.log('Expenses fetched...');
           console.log(expenses);
         }),
-        catchError(this.handleError<Expense[]>('getAllExpenses', MockData.Expenses))
+        catchError(this.handleError<Expense[]>('getAllExpenses', MockData.expenses))
       );
   }
 
@@ -37,7 +37,7 @@ export class ExpenseService {
           console.log('Expenses fetched...');
           console.log(expenses);
         }),
-        catchError(this.handleError<Expense[]>('getExpenses', MockData.Expenses))
+        catchError(this.handleError<Expense[]>('getExpenses', MockData.expenses))
       );
   }
 

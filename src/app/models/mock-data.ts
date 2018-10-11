@@ -2,7 +2,7 @@ import { Expense } from '../models/expense';
 
 export class MockData {
 
-    public static Expenses: Expense[] = [
+    public static expenses: Expense[] = [
         {
             'id': 1,
             'applicationDate': '20181001',
