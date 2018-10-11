@@ -71,6 +71,8 @@ export class ExpenseComponent implements OnInit {
     
     await this.delay(1000);
 
+    this.loaderService.hideLoader();
+
     let exported: string = '';
 
     this.expenses.forEach(function (item) {
@@ -79,8 +81,6 @@ export class ExpenseComponent implements OnInit {
         exported += `${item.id} exported\r\n`
       }
     });
-
-    this.loaderService.hideLoader();
 
     alert(exported);
   }
