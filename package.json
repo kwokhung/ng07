@@ -1,6 +1,8 @@
 {
-  "name": "ng07",
+  "name": "expense-voucher-export",
+  "description": "Expense Voucher Export",
   "version": "0.0.0",
+  "author": "Mason IT",
   "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
