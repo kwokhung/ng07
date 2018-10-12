@@ -17,7 +17,7 @@ export class ExportItemComponent implements OnInit {
   }
 
   click(e) {
-    alert(`${this.exportItem.id}: ${e.target.checked ? 'checked' : 'unchecked'}`);
+    //alert(`${this.exportItem.id}: clicked`);
     this.clicked.emit(this.exportItem);
   }
 

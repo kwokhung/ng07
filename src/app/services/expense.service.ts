@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
+import { environment } from '../../environments/environment';
 
 interface Criteria {
   applicationDate: string;
@@ -17,7 +18,7 @@ interface Criteria {
 })
 export class ExpenseService {
 
-  expensesUrl = 'http://localhost:3000/expense';
+  expensesUrl = environment.expensesUrl;
   expenses: Expense[] = [];
 
   constructor(private httpClient: HttpClient) {

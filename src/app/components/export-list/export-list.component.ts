@@ -30,6 +30,10 @@ export class ExportListComponent implements OnInit {
       );
   }
 
+  clickItem(exportItem: ExportItem) {
+    //alert(`${exportItem.id}: clicked`);
+  }
+
   async delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
