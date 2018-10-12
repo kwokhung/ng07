@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExpenseComponent } from './components/expense/expense.component';
 import { ExpenseItemComponent } from './components/expense-item/expense-item.component';
+import { ExportListComponent } from './components/export-list/export-list.component';
 import { LoaderComponent } from './components/loader/loader.component';
 
 import { ExpenseService } from './services/expense.service';
@@ -25,6 +26,7 @@ import { LoaderService } from './services/loader.service';
     HomeComponent,
     ExpenseComponent,
     ExpenseItemComponent,
+    ExportListComponent,
     LoaderComponent
   ],
   imports: [

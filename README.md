@@ -44,6 +44,7 @@ ng generate component components/home
 ng generate component components/expense
 ng generate component components/expense-item
 ng generate component components/loader
+ng generate component components/export-list
 ng generate service services/expense
 ng generate service services/loader
 ng generate class models/expense
