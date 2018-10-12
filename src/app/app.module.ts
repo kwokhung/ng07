@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+//import { library } from '@fortawesome/fontawesome-svg-core';
+//import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,7 +17,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 
-library.add(faSpinner);
+//library.add(faSpinner);
 
 @NgModule({
   declarations: [
@@ -31,8 +31,8 @@ library.add(faSpinner);
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    FontAwesomeModule
+    HttpClientModule/*,
+    FontAwesomeModule*/
   ],
   providers: [ExpenseService, LoaderService],
   bootstrap: [AppComponent]
