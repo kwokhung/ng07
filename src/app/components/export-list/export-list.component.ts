@@ -14,7 +14,12 @@ export class ExportListComponent implements OnInit {
   exportList: ExportItem[] = [];
 
   constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+  }
+
+  async ngOnInit() {
     this.loaderService.showLoader();
+
+    await this.delay(1000);
 
     this.expenseService.getExportList()
       .subscribe(
@@ -23,10 +28,10 @@ export class ExportListComponent implements OnInit {
           this.loaderService.hideLoader();
         }
       );
-
   }
 
-  ngOnInit() {
+  async delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

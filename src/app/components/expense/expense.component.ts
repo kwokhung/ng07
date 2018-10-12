@@ -30,6 +30,8 @@ export class ExpenseComponent implements OnInit {
   constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
     /*this.loaderService.showLoader();
 
+    await this.delay(1000);
+
     this.expenseService.getAllExpenses()
       .subscribe(
         expenses => {
