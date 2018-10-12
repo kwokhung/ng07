@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Expense } from '../../models/expense';
 import { ExpenseService } from '../../services/expense.service';
@@ -26,7 +27,7 @@ export class ExpenseComponent implements OnInit {
 
   expenses: Expense[] = [];
 
-  constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+  constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
     /*this.loaderService.showLoader();
 
     this.expenseService.getAllExpenses()
@@ -90,13 +91,15 @@ export class ExpenseComponent implements OnInit {
       .subscribe(
         result => {
           console.log(`result: ${JSON.stringify(result)}`);
-          this.expenseService.getExpenses(this.searchForm.value)
+          /*this.expenseService.getExpenses(this.searchForm.value)
             .subscribe(
               expenses => {
                 this.expenses = expenses;
                 this.loaderService.hideLoader();
               }
-            );
+            );*/
+          this.loaderService.hideLoader();
+          this.router.navigateByUrl('/export-list');
         }
       );
   }
