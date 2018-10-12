@@ -14,6 +14,7 @@ import { ExpenseComponent } from './components/expense/expense.component';
 import { ExpenseItemComponent } from './components/expense-item/expense-item.component';
 import { ExportListComponent } from './components/export-list/export-list.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ExportItemComponent } from './components/export-item/export-item.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
@@ -27,6 +28,7 @@ import { LoaderService } from './services/loader.service';
     ExpenseComponent,
     ExpenseItemComponent,
     ExportListComponent,
+    ExportItemComponent,
     LoaderComponent
   ],
   imports: [

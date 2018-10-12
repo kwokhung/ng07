@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expense } from '../models/expense';
+import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
 
 interface Criteria {
@@ -27,7 +28,7 @@ export class ExpenseService {
     return this.httpClient.get<Expense[]>(`${this.expensesUrl}/getAllExpenses`)
       .pipe(
         tap(expenses => {
-          console.log('Expenses fetched...');
+          console.log('Expenses got...');
           console.log(expenses);
         }),
         catchError(this.handleError<Expense[]>('getAllExpenses', MockData.expenses))
@@ -40,14 +41,14 @@ export class ExpenseService {
     return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, parameter)
       .pipe(
         tap(expenses => {
-          console.log('Expenses fetched...');
+          console.log('Expenses got...');
           console.log(expenses);
         }),
-        catchError(this.handleError<Expense[]>('getExpenses', MockData.expenses))
+        catchError(this.handleError<Expense[]>('getExpenses', []))
       );
   }
 
-  requestToExport(parameter: number[]): Observable<Expense[]> {
+  requestToExport(parameter: number[]): Observable<any> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, parameter)
@@ -57,6 +58,17 @@ export class ExpenseService {
           console.log(result);
         }),
         catchError(this.handleError<any>('requestToExport', {}))
+      );
+  }
+
+  getExportList(): Observable<ExportItem[]> {
+    return this.httpClient.get<ExportItem[]>(`${this.expensesUrl}/getExportList`)
+      .pipe(
+        tap(result => {
+          console.log('Export List got...');
+          console.log(result);
+        }),
+        catchError(this.handleError<ExportItem[]>('getExportList', []))
       );
   }
 
