@@ -73,6 +73,17 @@ export class ExpenseService {
       );
   }
 
+  getExportItemFile(): Observable<Blob> {
+    return this.httpClient.get(`${this.expensesUrl}/getExportItemFile`, { responseType: 'blob' })
+      .pipe(
+        tap(result => {
+          console.log('Export Item File got...');
+          console.log(result);
+        }),
+        catchError(this.handleError('getExportItemFile', new Blob(['How are you?'], { type: 'application/octet-stream' })))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation}: ${JSON.stringify(error)}`);

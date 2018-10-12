@@ -11,6 +11,8 @@ export class ExportItemComponent implements OnInit {
   @Input() exportItem: ExportItem;
   @Output() clicked = new EventEmitter<ExportItem>();
 
+  fileUrl;
+
   constructor() { }
 
   ngOnInit() {

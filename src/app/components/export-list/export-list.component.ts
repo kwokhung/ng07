@@ -30,8 +30,51 @@ export class ExportListComponent implements OnInit {
       );
   }
 
-  clickItem(exportItem: ExportItem) {
+  async clickItem(exportItem: ExportItem) {
     //alert(`${exportItem.id}: clicked`);
+    //this.downloadFile(new Blob(['some text']), 'application/octet-stream', 'file.txt');
+    this.loaderService.showLoader();
+
+    await this.delay(1000);
+
+    this.expenseService.getExportItemFile()
+      .subscribe(
+        exportItemFile => {
+          this.downloadFile(exportItemFile, 'application/octet-stream', 'file.txt');
+          this.loaderService.hideLoader();
+        }
+      );
+
+  }
+
+  downloadFile(blob: Blob, type?: string, name?: string) {
+    let newBlob;
+
+    if (type) {
+      newBlob = new Blob([blob], { type: type })      
+    }
+
+    if (window.navigator && window.navigator.msSaveOrOpenBlob && false) {
+      window.navigator.msSaveOrOpenBlob(newBlob);
+    }
+    else {
+      let data = window.URL.createObjectURL(newBlob);
+      let downloadLink = document.createElement('a');
+      downloadLink.href = data;
+
+      if (name) {
+        downloadLink.download = name;
+      }
+      else {
+        downloadLink.download = 'download.file';
+      }
+    
+      downloadLink.click();
+
+      setTimeout(() => {
+        window.URL.revokeObjectURL(data);
+      }, 100)
+    }
   }
 
   async delay(ms: number) {
