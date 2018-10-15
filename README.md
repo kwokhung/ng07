@@ -51,3 +51,4 @@ ng generate service services/loader
 ng generate class models/expense
 ng generate class models/exportItem
 ng generate class models/mock-data
+ng generate interface models/searchCriteria

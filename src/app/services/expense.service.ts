@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
-import { environment } from '../../environments/environment';
+import { SearchCriteria } from '../models/search-criteria';
 
-interface Criteria {
-  applicationDate: string;
-  applicationNo: string;
-  payee: string;
-}
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +33,7 @@ export class ExpenseService {
       );
   }
 
-  getExpenses(parameter: Criteria): Observable<Expense[]> {
+  getExpenses(parameter: SearchCriteria): Observable<Expense[]> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, parameter)

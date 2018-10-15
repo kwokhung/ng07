@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+
 import { Expense } from '../../models/expense';
+import { SearchCriteria } from '../../models/search-criteria';
+
 import { ExpenseService } from '../../services/expense.service';
 import { LoaderService } from '../../services/loader.service';
-
-interface Criteria {
-  applicationDate: string;
-  applicationNo: string;
-  payee: string;
-}
 
 @Component({
   selector: 'app-expense',
@@ -53,7 +50,7 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
-  async search(parameter: Criteria) {
+  async search(parameter: SearchCriteria) {
     this.loaderService.showLoader();
 
     await this.delay(1000);
