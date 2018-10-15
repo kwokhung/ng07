@@ -45,7 +45,6 @@ export class ExportListComponent implements OnInit {
           this.loaderService.hideLoader();
         }
       );
-
   }
 
   downloadFile(blob: Blob, type?: string, name?: string) {
