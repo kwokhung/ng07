@@ -52,3 +52,4 @@ ng generate class models/expense
 ng generate class models/exportItem
 ng generate class models/mock-data
 ng generate interface models/searchCriteria
+ng generate interface models/downloadExportCriteria

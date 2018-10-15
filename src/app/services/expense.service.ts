@@ -7,6 +7,7 @@ import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
 import { SearchCriteria } from '../models/search-criteria';
+import { DownloadExportCriteria } from '../models/download-export-criteria';
 
 import { environment } from '../../environments/environment';
 
@@ -70,14 +71,16 @@ export class ExpenseService {
       );
   }
 
-  getExportItemFile(): Observable<Blob> {
-    return this.httpClient.get(`${this.expensesUrl}/getExportItemFile`, { responseType: 'blob' })
+  getExportItemFile(parameter: DownloadExportCriteria): Observable<Blob> {
+    console.log(`parameter: ${JSON.stringify(parameter)}`);
+
+    return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, parameter, { responseType: 'blob' })
       .pipe(
         tap(result => {
           console.log('Export Item File got...');
           console.log(result);
         }),
-        catchError(this.handleError('getExportItemFile', new Blob(['How are you?'], { type: 'application/octet-stream' })))
+        catchError(this.handleError('getExportItemFile', new Blob(['"SeqNo","ExpenseId"\r\n'], { type: 'application/octet-stream' })))
       );
   }
 

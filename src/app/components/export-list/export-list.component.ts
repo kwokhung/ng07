@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ExportItem } from '../../models/export-item';
+
 import { ExpenseService } from '../../services/expense.service';
 import { LoaderService } from '../../services/loader.service';
 
@@ -36,7 +38,7 @@ export class ExportListComponent implements OnInit {
 
     await this.delay(1000);
 
-    this.expenseService.getExportItemFile()
+    this.expenseService.getExportItemFile({ date: exportItem.date, batchNo: exportItem.batchNo })
       .subscribe(
         exportItemFile => {
           this.downloadFile(exportItemFile, 'application/octet-stream', 'export.csv');
@@ -50,7 +52,7 @@ export class ExportListComponent implements OnInit {
     let newBlob;
 
     if (type) {
-      newBlob = new Blob([blob], { type: type })      
+      newBlob = new Blob([blob], { type: type })
     }
 
     if (window.navigator && window.navigator.msSaveOrOpenBlob && false) {
@@ -67,7 +69,7 @@ export class ExportListComponent implements OnInit {
       else {
         downloadLink.download = 'download.file';
       }
-    
+
       downloadLink.click();
 
       setTimeout(() => {
