@@ -32,7 +32,6 @@ export class ExportListComponent implements OnInit {
 
   async clickItem(exportItem: ExportItem) {
     //alert(`${exportItem.id}: clicked`);
-    //this.downloadFile(new Blob(['some text']), 'application/octet-stream', 'file.txt');
     this.loaderService.showLoader();
 
     await this.delay(1000);
@@ -40,7 +39,7 @@ export class ExportListComponent implements OnInit {
     this.expenseService.getExportItemFile()
       .subscribe(
         exportItemFile => {
-          this.downloadFile(exportItemFile, 'application/octet-stream', 'file.txt');
+          this.downloadFile(exportItemFile, 'application/octet-stream', 'export.csv');
           this.loaderService.hideLoader();
         }
       );
