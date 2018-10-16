@@ -33,7 +33,7 @@ export class ExpenseService {
         catchError(this.handleError<Expense[]>('getAllExpenses', MockData.expenses))
       );*/
 
-    return this.httpClient.get<any>(`http://localhost:5400/api/ExpenseService/getAllExpenses`)
+    return this.httpClient.get<any>(`${this.expensesUrl}/getAllExpenses`)
       .pipe(
         map(data => data.content.expenses.map(expense => {
           return {
@@ -65,7 +65,7 @@ export class ExpenseService {
         catchError(this.handleError<Expense[]>('getExpenses', []))
       );*/
 
-    return this.httpClient.post<any>(`http://localhost:5400/api/ExpenseService/getExpenses`, parameter)
+    return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, parameter)
       .pipe(
         map(data => data.content.expenses.map(expense => {
           return {
@@ -97,7 +97,7 @@ export class ExpenseService {
         catchError(this.handleError<any>('requestToExport', {}))
       );*/
 
-    return this.httpClient.post<any>(`http://localhost:5400/api/ExpenseService/requestToExport`, { ids: parameter })
+    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, { ids: parameter })
       .pipe(
         tap(result => {
           console.log('Export requested...');
@@ -117,7 +117,7 @@ export class ExpenseService {
         catchError(this.handleError<ExportItem[]>('getExportList', []))
       );*/
 
-    return this.httpClient.get<any>(`http://localhost:5400/api/ExpenseService/getExportList`)
+    return this.httpClient.get<any>(`${this.expensesUrl}/getExportList`)
       .pipe(
         map(data => data.content.exportList),
         tap(result => {
@@ -140,7 +140,7 @@ export class ExpenseService {
         catchError(this.handleError('getExportItemFile', new Blob(['"SeqNo","ExpenseId","ApplicationNo"\r\n'], { type: 'application/octet-stream' })))
       );*/
 
-    return this.httpClient.post(`http://localhost:5400/api/ExpenseService/getExportItemFile`, parameter, { responseType: 'blob' })
+    return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, parameter, { responseType: 'blob' })
       .pipe(
         tap(result => {
           console.log('Export Item File got...');
