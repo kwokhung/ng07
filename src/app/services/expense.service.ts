@@ -35,13 +35,13 @@ export class ExpenseService {
 
     return this.httpClient.get<any>(`${this.expensesUrl}/getAllExpenses`)
       .pipe(
-        map(data => data.content.expenses.map(expense => {
+        map(data => data.content.expenses.map((expense, index) => {
           return {
             id: expense.RequestId,
             applicationDate: expense.AppDate,
             applicationNo: expense.ApplicationNo,
             payee: expense.PayeeName,
-            status: 'Export Pending',
+            status: data.content.expensesStatus[index],
             selected: false
           };
         })),
@@ -67,13 +67,13 @@ export class ExpenseService {
 
     return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, parameter)
       .pipe(
-        map(data => data.content.expenses.map(expense => {
+        map(data => data.content.expenses.map((expense, index) => {
           return {
             id: expense.RequestId,
             applicationDate: expense.AppDate,
             applicationNo: expense.ApplicationNo,
             payee: expense.PayeeName,
-            status: 'Export Pending',
+            status: data.content.expensesStatus[index],
             selected: false
           };
         })),
