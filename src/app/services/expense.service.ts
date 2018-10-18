@@ -37,7 +37,7 @@ export class ExpenseService {
       .pipe(
         map(data => data.content.expenses.map(expense => {
           return {
-            id: expense.Id,
+            id: expense.RequestId,
             applicationDate: expense.AppDate,
             applicationNo: expense.ApplicationNo,
             payee: expense.PayeeName,
@@ -69,7 +69,7 @@ export class ExpenseService {
       .pipe(
         map(data => data.content.expenses.map(expense => {
           return {
-            id: expense.Id,
+            id: expense.RequestId,
             applicationDate: expense.AppDate,
             applicationNo: expense.ApplicationNo,
             payee: expense.PayeeName,
