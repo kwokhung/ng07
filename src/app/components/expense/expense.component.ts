@@ -25,18 +25,9 @@ export class ExpenseComponent implements OnInit {
   expenses: Expense[] = [];
 
   constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
-    /*this.loaderService.showLoader();
-
-    this.expenseService.getAllExpenses()
-      .subscribe(
-        expenses => {
-          this.expenses = expenses;
-          this.loaderService.hideLoader();
-        }
-      );*/
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.applicationDate = new FormControl();
     this.applicationNo = new FormControl();
     this.payee = new FormControl();
@@ -46,6 +37,18 @@ export class ExpenseComponent implements OnInit {
       'applicationNo': this.applicationNo,
       'payee': this.payee
     });
+
+    /*this.loaderService.showLoader();
+
+    await this.delay(1000);
+
+    this.expenseService.getAllExpenses()
+      .subscribe(
+        expenses => {
+          this.expenses = expenses;
+          this.loaderService.hideLoader();
+        }
+      );*/
   }
 
   async search(parameter: SearchCriteria) {

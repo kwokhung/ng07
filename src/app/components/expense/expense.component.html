@@ -29,14 +29,18 @@
         <pre class="alert alert-dark">{{searchForm.value | json}}</pre>
       </div-->
     </div>
-    <div class="card bg-secondary text-white" *ngIf="expenses.length !== 0">
-      <div class="card-body">
-        <h4 class="card-title">Expense Items</h4>
-        <ul>
-          <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
-        </ul>
-        <div class="text-center">
-          <button type="button" class="btn btn-success" (click)="export()">Export</button>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card bg-secondary text-white" *ngIf="expenses.length !== 0">
+          <div class="card-body">
+            <h4 class="card-title">Expense Items</h4>
+            <ul>
+              <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
+            </ul>
+            <div class="text-center">
+              <button type="button" class="btn btn-success" (click)="export()">Export</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

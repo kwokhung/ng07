@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { ExportItem } from '../../models/export-item';
+import { SearchExportCriteria } from '../../models/search-export-criteria';
 
 import { ExpenseService } from '../../services/expense.service';
 import { LoaderService } from '../../services/loader.service';
@@ -13,17 +15,40 @@ import { LoaderService } from '../../services/loader.service';
 export class ExportListComponent implements OnInit {
 
   title = 'Export List';
+  searchForm: FormGroup;
+  date: FormControl;
+
   exportList: ExportItem[] = [];
 
   constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
   }
 
   async ngOnInit() {
+    this.date = new FormControl();
+
+    this.searchForm = new FormGroup({
+      'date': this.date
+    });
+
+    /*this.loaderService.showLoader();
+
+    await this.delay(1000);
+
+    this.expenseService.getWholeExportList()
+      .subscribe(
+        exportList => {
+          this.exportList = exportList;
+          this.loaderService.hideLoader();
+        }
+      );*/
+  }
+
+  async search(parameter: SearchExportCriteria) {
     this.loaderService.showLoader();
 
     await this.delay(1000);
 
-    this.expenseService.getExportList()
+    this.expenseService.getExportList(parameter)
       .subscribe(
         exportList => {
           this.exportList = exportList;

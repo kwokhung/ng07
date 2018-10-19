@@ -6,6 +6,23 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        <form class="form-inline" novalidate [formGroup]="searchForm">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="text" class="form-control" formControlName="date">
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="search(searchForm.value)">Search</button>
+        </form>
+      </div>
+      <div class="col-md-12">
+        <label>
+          <strong>Search Form</strong>
+        </label>
+        <pre class="alert alert-dark">{{searchForm.value | json}}</pre>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <div class="card bg-secondary text-white" *ngIf="exportList.length !== 0">
           <div class="card-body">
             <h4 class="card-title">Export Items</h4>

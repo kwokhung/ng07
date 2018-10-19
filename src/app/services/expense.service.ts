@@ -7,6 +7,7 @@ import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
 import { SearchCriteria } from '../models/search-criteria';
+import { SearchExportCriteria } from '../models/search-export-criteria';
 import { DownloadExportCriteria } from '../models/download-export-criteria';
 
 import { environment } from '../../environments/environment';
@@ -107,8 +108,29 @@ export class ExpenseService {
       );
   }
 
-  getExportList(): Observable<ExportItem[]> {
-    /*return this.httpClient.get<ExportItem[]>(`${this.expensesUrl}/getExportList`)
+  getWholeExportList(): Observable<ExportItem[]> {
+    /*return this.httpClient.get<ExportItem[]>(`${this.expensesUrl}/getWholeExportList`)
+      .pipe(
+        tap(result => {
+          console.log('Export List got...');
+          console.log(result);
+        }),
+        catchError(this.handleError<ExportItem[]>('getWholeExportList', []))
+      );*/
+
+    return this.httpClient.get<any>(`${this.expensesUrl}/getWholeExportList`)
+      .pipe(
+        map(data => data.content.exportList),
+        tap(result => {
+          console.log('Export List got...');
+          console.log(result);
+        }),
+        catchError(this.handleError<ExportItem[]>('getWholeExportList', []))
+      );
+  }
+
+  getExportList(parameter: SearchExportCriteria): Observable<ExportItem[]> {
+    /*return this.httpClient.post<ExportItem[]>(`${this.expensesUrl}/getExportList`, parameter)
       .pipe(
         tap(result => {
           console.log('Export List got...');
@@ -117,7 +139,7 @@ export class ExpenseService {
         catchError(this.handleError<ExportItem[]>('getExportList', []))
       );*/
 
-    return this.httpClient.get<any>(`${this.expensesUrl}/getExportList`)
+    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, parameter)
       .pipe(
         map(data => data.content.exportList),
         tap(result => {
