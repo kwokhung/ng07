@@ -33,7 +33,10 @@ export class ExportListComponent implements OnInit {
       'date': this.date
     });
 
-    this.date.setValue('20181019');
+    let now = new Date();
+    let today = `${now.getFullYear()}${(now.getMonth() + 1 < 10 ? '0' : '')}${now.getMonth() + 1}${(now.getDate() < 10 ? '0' : '')}${now.getDate()}`;
+
+    this.date.setValue(today);
     this.search(this.searchForm.value);
 
     /*this.loaderService.showLoader();
