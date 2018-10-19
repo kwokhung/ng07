@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { Expense } from '../../models/expense';
-import { SearchCriteria } from '../../models/search-criteria';
+import { SearchExpenseCriteria } from '../../models/search-expense-criteria';
 
 import { ExpenseService } from '../../services/expense.service';
 import { LoaderService } from '../../services/loader.service';
@@ -51,7 +51,7 @@ export class ExpenseComponent implements OnInit {
       );*/
   }
 
-  async search(parameter: SearchCriteria) {
+  async search(parameter: SearchExpenseCriteria) {
     this.loaderService.showLoader();
 
     await this.delay(1000);

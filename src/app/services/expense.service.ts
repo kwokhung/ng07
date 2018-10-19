@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
 import { MockData } from '../models/mock-data';
-import { SearchCriteria } from '../models/search-criteria';
+import { SearchExpenseCriteria } from '../models/search-expense-criteria';
 import { SearchExportCriteria } from '../models/search-export-criteria';
 import { DownloadExportCriteria } from '../models/download-export-criteria';
 
@@ -54,7 +54,7 @@ export class ExpenseService {
       );
   }
 
-  getExpenses(parameter: SearchCriteria): Observable<Expense[]> {
+  getExpenses(parameter: SearchExpenseCriteria): Observable<Expense[]> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     /*return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, parameter)
