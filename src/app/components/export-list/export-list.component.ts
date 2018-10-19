@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { ExportItem } from '../../models/export-item';
@@ -14,13 +14,16 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class ExportListComponent implements OnInit {
 
+  nativeElement: any;
+
   title = 'Export List';
   searchForm: FormGroup;
   date: FormControl;
 
   exportList: ExportItem[] = [];
 
-  constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+  constructor(private element: ElementRef, private expenseService: ExpenseService, private loaderService: LoaderService) {
+    this.nativeElement = element.nativeElement;
   }
 
   async ngOnInit() {
@@ -29,6 +32,9 @@ export class ExportListComponent implements OnInit {
     this.searchForm = new FormGroup({
       'date': this.date
     });
+
+    this.date.setValue('20181019');
+    this.search(this.searchForm.value);
 
     /*this.loaderService.showLoader();
 
