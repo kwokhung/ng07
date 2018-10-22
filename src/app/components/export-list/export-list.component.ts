@@ -84,24 +84,23 @@ export class ExportListComponent implements OnInit {
   downloadFile(blob: Blob, type?: string, name?: string) {
     let newBlob;
 
+    if (!name) {
+      name = 'download.file';
+    }
+
     if (type) {
       newBlob = new Blob([blob], { type: type })
     }
 
-    if (window.navigator && window.navigator.msSaveOrOpenBlob && false) {
-      window.navigator.msSaveOrOpenBlob(newBlob);
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(newBlob, name);
     }
     else {
       let data = window.URL.createObjectURL(newBlob);
       let downloadLink = document.createElement('a');
-      downloadLink.href = data;
 
-      if (name) {
-        downloadLink.download = name;
-      }
-      else {
-        downloadLink.download = 'download.file';
-      }
+      downloadLink.href = data;
+      downloadLink.download = name;
 
       downloadLink.click();
 
