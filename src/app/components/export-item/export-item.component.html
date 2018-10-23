@@ -4,7 +4,7 @@
       <div class="card-body">
         <h4 class="card-title"><span>Seq No.: {{exportItem.id}}</span></h4>
         <div>
-          <span>Date: {{formatDate(exportItem.date)}}</span>
+          <span>Date: {{exportItem.date | formatDate:'YYYY/MM/DD'}}</span>
         </div>
         <div>
           <span>Batch No.: {{exportItem.batchNo}}</span>

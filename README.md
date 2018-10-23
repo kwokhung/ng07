@@ -60,3 +60,4 @@ ng generate interface models/searchCriteria
 ng generate interface models/searchExpenseCriteria
 ng generate interface models/searchExportCriteria
 ng generate interface models/downloadExportCriteria
+ng generate pipe pipes/formatDate

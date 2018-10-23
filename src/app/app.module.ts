@@ -19,6 +19,8 @@ import { ExportItemComponent } from './components/export-item/export-item.compon
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 
+import { FormatDatePipe } from './pipes/format-date.pipe';
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'YYYY/MM/DD',
@@ -39,7 +41,8 @@ export const MY_FORMATS = {
     ExpenseItemComponent,
     ExportListComponent,
     ExportItemComponent,
-    LoaderComponent
+    LoaderComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,
