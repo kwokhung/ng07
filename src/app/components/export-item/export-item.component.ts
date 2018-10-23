@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import * as moment from "moment";
+
 import { ExportItem } from '../../models/export-item';
 
 @Component({
@@ -23,4 +25,8 @@ export class ExportItemComponent implements OnInit {
     this.clicked.emit(this.exportItem);
   }
 
+  formatDate(date: string) {
+    return moment(date).format('YYYY/MM/DD');
+  }
+  
 }

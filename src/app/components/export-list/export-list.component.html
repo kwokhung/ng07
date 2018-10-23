@@ -11,9 +11,9 @@
             <label>Date</label>
             <!--input type="text" class="form-control" formControlName="date"-->
             <mat-form-field>
-              <input matInput [matDatepicker]="picker" formControlName="date">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <input matInput [matDatepicker]="datePicker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+              <mat-datepicker #datePicker></mat-datepicker>
             </mat-form-field>
           </div>
           <button type="submit" class="btn btn-primary" (click)="search(searchForm.value)">Search</button>
