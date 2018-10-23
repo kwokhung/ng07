@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import * as moment from "moment";
+import * as moment from 'moment';
 
 import { ExportItem } from '../../models/export-item';
 import { SearchExportCriteria } from '../../models/search-export-criteria';

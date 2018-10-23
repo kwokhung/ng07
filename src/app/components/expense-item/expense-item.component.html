@@ -7,7 +7,7 @@
       <div class="card-body">
         <h4 class="card-title"><span>Application No.: {{expense.applicationNo}}</span></h4>
         <div>
-          <span>Application Date: {{expense.applicationDate}}</span>
+          <span>Application Date: {{expense.applicationDate | formatDate:'YYYY/MM/DD'}}</span>
         </div>
         <div>
           <span>Payee: {{expense.payee}}</span>
