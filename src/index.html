@@ -7,7 +7,7 @@
   <base href="/">
 
   <script>
-    if (require) {
+    if ('require' in window && require) {
       window.nodeRequire = require;
       delete window.require;
     }
