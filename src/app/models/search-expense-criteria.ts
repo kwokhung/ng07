@@ -1,5 +1,7 @@
+import * as moment from 'moment';
+
 export interface SearchExpenseCriteria {
-    applicationDate: string;
+    applicationDate: moment.Moment;
     applicationNo: string;
     payee: string;
 }

@@ -66,24 +66,27 @@ export class ExpenseService {
         catchError(this.handleError<Expense[]>('getExpenses', []))
       );*/
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, parameter)
-      .pipe(
-        map(data => data.content.expenses.map((expense, index) => {
-          return {
-            id: expense.RequestId,
-            applicationDate: expense.AppDate,
-            applicationNo: expense.ApplicationNo,
-            payee: expense.PayeeName,
-            status: data.content.expensesStatus[index],
-            selected: false
-          };
-        })),
-        tap(expenses => {
-          console.log('Expenses got...');
-          console.log(expenses);
-        }),
-        catchError(this.handleError<Expense[]>('getExpenses', []))
-      );
+    return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, {
+      applicationDate: (parameter.applicationDate ? parameter.applicationDate.format('YYYYMMDD') : null),
+      applicationNo: parameter.applicationNo,
+      payee: parameter.payee
+    }).pipe(
+      map(data => data.content.expenses.map((expense, index) => {
+        return {
+          id: expense.RequestId,
+          applicationDate: expense.AppDate,
+          applicationNo: expense.ApplicationNo,
+          payee: expense.PayeeName,
+          status: data.content.expensesStatus[index],
+          selected: false
+        };
+      })),
+      tap(expenses => {
+        console.log('Expenses got...');
+        console.log(expenses);
+      }),
+      catchError(this.handleError<Expense[]>('getExpenses', []))
+    );
   }
 
   requestToExport(parameter: number[]): Observable<any> {
@@ -98,14 +101,15 @@ export class ExpenseService {
         catchError(this.handleError<any>('requestToExport', {}))
       );*/
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, { ids: parameter })
-      .pipe(
-        tap(result => {
-          console.log('Export requested...');
-          console.log(result);
-        }),
-        catchError(this.handleError<any>('requestToExport', {}))
-      );
+    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, {
+      ids: parameter
+    }).pipe(
+      tap(result => {
+        console.log('Export requested...');
+        console.log(result);
+      }),
+      catchError(this.handleError<any>('requestToExport', {}))
+    );
   }
 
   getWholeExportList(): Observable<ExportItem[]> {
@@ -141,15 +145,16 @@ export class ExpenseService {
         catchError(this.handleError<ExportItem[]>('getExportList', []))
       );*/
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, { date: parameter.date.format('YYYYMMDD') })
-      .pipe(
-        map(data => data.content.exportList),
-        tap(result => {
-          console.log('Export List got...');
-          console.log(result);
-        }),
-        catchError(this.handleError<ExportItem[]>('getExportList', []))
-      );
+    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, {
+      date: (parameter.date ? parameter.date.format('YYYYMMDD') : null)
+    }).pipe(
+      map(data => data.content.exportList),
+      tap(result => {
+        console.log('Export List got...');
+        console.log(result);
+      }),
+      catchError(this.handleError<ExportItem[]>('getExportList', []))
+    );
   }
 
   getExportItemFile(parameter: DownloadExportCriteria): Observable<Blob> {
