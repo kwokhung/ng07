@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
@@ -130,6 +130,8 @@ export class ExpenseService {
   }
 
   getExportList(parameter: SearchExportCriteria): Observable<ExportItem[]> {
+    console.log(`parameter: ${JSON.stringify(parameter)}`);
+
     /*return this.httpClient.post<ExportItem[]>(`${this.expensesUrl}/getExportList`, parameter)
       .pipe(
         tap(result => {
@@ -139,7 +141,7 @@ export class ExpenseService {
         catchError(this.handleError<ExportItem[]>('getExportList', []))
       );*/
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, parameter)
+    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, { date: parameter.date.format('YYYYMMDD') })
       .pipe(
         map(data => data.content.exportList),
         tap(result => {

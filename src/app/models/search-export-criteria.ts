@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export interface SearchExportCriteria {
-    date: string;
+    date: moment.Moment;
 }

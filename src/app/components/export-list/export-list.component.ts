@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import * as moment from "moment";
 
 import { ExportItem } from '../../models/export-item';
 import { SearchExportCriteria } from '../../models/search-export-criteria';
@@ -33,10 +34,10 @@ export class ExportListComponent implements OnInit {
       'date': this.date
     });
 
-    let now = new Date();
-    let today = `${now.getFullYear()}${(now.getMonth() + 1 < 10 ? '0' : '')}${now.getMonth() + 1}${(now.getDate() < 10 ? '0' : '')}${now.getDate()}`;
+    //let now = new Date();
+    //let today = `${now.getFullYear()}${(now.getMonth() + 1 < 10 ? '0' : '')}${now.getMonth() + 1}${(now.getDate() < 10 ? '0' : '')}${now.getDate()}`;
 
-    this.date.setValue(today);
+    this.date.setValue(moment(new Date()));
     this.search(this.searchForm.value);
 
     /*this.loaderService.showLoader();
