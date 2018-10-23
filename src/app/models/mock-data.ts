@@ -33,27 +33,24 @@ export class MockData {
     public static duplicateInvoices: DuplicateInvoice[] = [
         {
             'id': 1,
-            'applicationDate': '20181001',
-            'applicationNo': 'App-01',
+            'documentNo': 'Doc-01',
+            'documentDate': '20181001',
             'payee': '16990',
-            'status': '',
-            'selected': false
+            'applicationNos': 'App-01'
         },
         {
             'id': 2,
-            'applicationDate': '20181002',
-            'applicationNo': 'App-02',
-            'payee': '59990',
-            'status': 'Exported',
-            'selected': false
+            'documentNo': 'Doc-02',
+            'documentDate': '20181001',
+            'payee': '16991',
+            'applicationNos': 'App-02'
         },
         {
             'id': 3,
-            'applicationDate': '20181003',
-            'applicationNo': 'App-03',
-            'payee': 'abc',
-            'status': '',
-            'selected': false
+            'documentNo': 'Doc-03',
+            'documentDate': '20181001',
+            'payee': '16990',
+            'applicationNos': 'App-01,App-02'
         }
     ];
 
