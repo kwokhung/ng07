@@ -1,19 +1,23 @@
 <li>
   <div class="row">
-    <div class="checkbox col-md-1">
-      <input type="checkbox" (click)="click($event)">
+    <div class="col-md-1">
+      <div class="checkbox">
+        <input type="checkbox" (click)="click($event)">
+      </div>
     </div>
-    <div class="card bg-primary col-md-11">
-      <div class="card-body">
-        <h4 class="card-title"><span>Application No.: {{expense.applicationNo}}</span></h4>
-        <div>
-          <span>Application Date: {{expense.applicationDate | formatDate:'YYYY/MM/DD'}}</span>
-        </div>
-        <div>
-          <span>Payee: {{expense.payee}}</span>
-        </div>
-        <div>
-          <span>Status: {{expense.status}}</span>
+    <div class="col-md-11">
+      <div class="card bg-primary">
+        <div class="card-body">
+          <h4 class="card-title"><span>Application No.: {{expense.applicationNo}}</span></h4>
+          <div>
+            <span>Application Date: {{expense.applicationDate | formatDate:'YYYY/MM/DD'}}</span>
+          </div>
+          <div>
+            <span>Payee: {{expense.payee}}</span>
+          </div>
+          <div>
+            <span>Status: {{expense.status}}</span>
+          </div>
         </div>
       </div>
     </div>

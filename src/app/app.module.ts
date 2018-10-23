@@ -21,6 +21,7 @@ import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
+import { DuplicateInvoiceItemComponent } from './components/duplicate-invoice-item/duplicate-invoice-item.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -44,7 +45,8 @@ export const MY_FORMATS = {
     ExportItemComponent,
     LoaderComponent,
     DuplicateInvoiceComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    DuplicateInvoiceItemComponent
   ],
   imports: [
     BrowserModule,

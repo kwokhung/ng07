@@ -1,13 +1,15 @@
 <li>
   <div class="row">
-    <div class="card bg-primary col-md-11">
-      <div class="card-body">
-        <h4 class="card-title"><span>Seq No.: {{exportItem.id}}</span></h4>
-        <div>
-          <span>Date: {{exportItem.date | formatDate:'YYYY/MM/DD'}}</span>
-        </div>
-        <div>
-          <span>Batch No.: {{exportItem.batchNo}}</span>
+    <div class="col-md-11">
+      <div class="card bg-primary">
+        <div class="card-body">
+          <h4 class="card-title"><span>Seq No.: {{exportItem.id}}</span></h4>
+          <div>
+            <span>Date: {{exportItem.date | formatDate:'YYYY/MM/DD'}}</span>
+          </div>
+          <div>
+            <span>Batch No.: {{exportItem.batchNo}}</span>
+          </div>
         </div>
       </div>
     </div>

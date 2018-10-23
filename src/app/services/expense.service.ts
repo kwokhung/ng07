@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
+import { DuplicateInvoice } from '../models/duplicate-invoice';
 import { MockData } from '../models/mock-data';
 import { SearchExpenseCriteria } from '../models/search-expense-criteria';
 import { SearchExportCriteria } from '../models/search-export-criteria';
@@ -177,6 +178,36 @@ export class ExpenseService {
         }),
         catchError(this.handleError('getExportItemFile', new Blob(['"SeqNo","ExpenseId","ApplicationNo"\r\n'], { type: 'application/octet-stream' })))
       );
+  }
+
+  getAllDuplicateInvoices(): Observable<DuplicateInvoice[]> {
+    return this.httpClient.get<DuplicateInvoice[]>(`${this.expensesUrl}/getAllDuplicateInvoices`)
+      .pipe(
+        tap(duplicateInvoices => {
+          console.log('Duplicate Invoices got...');
+          console.log(duplicateInvoices);
+        }),
+        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', MockData.duplicateInvoices))
+      );
+
+    /*return this.httpClient.get<any>(`${this.expensesUrl}/getAllDuplicateInvoices`)
+      .pipe(
+        map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
+          return {
+            id: duplicateInvoice.RequestId,
+            applicationDate: duplicateInvoice.AppDate,
+            applicationNo: duplicateInvoice.ApplicationNo,
+            payee: duplicateInvoice.PayeeName,
+            status: data.content.duplicateInvoicesStatus[index],
+            selected: false
+          };
+        })),
+        tap(duplicateInvoices => {
+          console.log('Duplicate Invoices got...');
+          console.log(duplicateInvoices);
+        }),
+        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', MockData.duplicateInvoices))
+      );*/
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

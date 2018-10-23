@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import * as moment from 'moment';
 
 import { Expense } from '../../models/expense';
 import { SearchExpenseCriteria } from '../../models/search-expense-criteria';

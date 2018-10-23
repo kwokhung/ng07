@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DuplicateInvoice } from '../../models/duplicate-invoice';
+
+import { ExpenseService } from '../../services/expense.service';
+import { LoaderService } from '../../services/loader.service';
+
 @Component({
   selector: 'app-duplicate-invoice',
   templateUrl: './duplicate-invoice.component.html',
@@ -7,9 +12,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DuplicateInvoiceComponent implements OnInit {
 
-  constructor() { }
+  title = 'Duplicate Invoice';
 
-  ngOnInit() {
+  duplicateInvoices: DuplicateInvoice[] = [];
+
+  constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+  }
+
+  async ngOnInit() {
+    this.loaderService.showLoader();
+
+    await this.delay(1000);
+
+    this.expenseService.getAllDuplicateInvoices()
+      .subscribe(
+        duplicateInvoices => {
+          this.duplicateInvoices = duplicateInvoices;
+          this.loaderService.hideLoader();
+        }
+      );
+  }
+
+  async delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

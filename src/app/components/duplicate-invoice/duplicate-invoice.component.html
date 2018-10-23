@@ -1,3 +1,20 @@
-<p>
-  duplicate-invoice works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">{{title}}</h1>
+    <div class="text-center">
+      <app-loader>Loading...</app-loader>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card bg-secondary text-white" *ngIf="duplicateInvoices.length !== 0">
+          <div class="card-body">
+            <h4 class="card-title">Duplicate Invoice Items</h4>
+            <ul>
+              <app-duplicate-invoice-item [duplicateInvoice]="duplicateInvoice" (clicked)="clickItem($event)" *ngFor="let duplicateInvoice of duplicateInvoices"></app-duplicate-invoice-item>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

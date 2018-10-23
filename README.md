@@ -52,10 +52,12 @@ ng generate component components/loader
 ng generate component components/export-list
 ng generate component components/export-item
 ng generate component components/duplicateInvoice
+ng generate component components/duplicateInvoice-item
 ng generate service services/expense
 ng generate service services/loader
 ng generate class models/expense
 ng generate class models/exportItem
+ng generate class models/duplicateInvoice
 ng generate class models/mock-data
 ng generate interface models/searchCriteria
 ng generate interface models/searchExpenseCriteria
