@@ -26,15 +26,6 @@ export class ExpenseService {
   }
 
   getAllExpenses(): Observable<Expense[]> {
-    /*return this.httpClient.get<Expense[]>(`${this.expensesUrl}/getAllExpenses`)
-      .pipe(
-        tap(expenses => {
-          console.log('Expenses got...');
-          console.log(expenses);
-        }),
-        catchError(this.handleError<Expense[]>('getAllExpenses', MockData.expenses))
-      );*/
-
     return this.httpClient.get<any>(`${this.expensesUrl}/getAllExpenses`)
       .pipe(
         map(data => data.content.expenses.map((expense, index) => {
@@ -57,15 +48,6 @@ export class ExpenseService {
 
   getExpenses(parameter: SearchExpenseCriteria): Observable<Expense[]> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
-
-    /*return this.httpClient.post<Expense[]>(`${this.expensesUrl}/getExpenses`, parameter)
-      .pipe(
-        tap(expenses => {
-          console.log('Expenses got...');
-          console.log(expenses);
-        }),
-        catchError(this.handleError<Expense[]>('getExpenses', []))
-      );*/
 
     return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, {
       applicationDate: (parameter.applicationDate ? parameter.applicationDate.format('YYYYMMDD') : null),
@@ -93,15 +75,6 @@ export class ExpenseService {
   requestToExport(parameter: number[]): Observable<any> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    /*return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, parameter)
-      .pipe(
-        tap(result => {
-          console.log('Export requested...');
-          console.log(result);
-        }),
-        catchError(this.handleError<any>('requestToExport', {}))
-      );*/
-
     return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, {
       ids: parameter
     }).pipe(
@@ -114,15 +87,6 @@ export class ExpenseService {
   }
 
   getWholeExportList(): Observable<ExportItem[]> {
-    /*return this.httpClient.get<ExportItem[]>(`${this.expensesUrl}/getWholeExportList`)
-      .pipe(
-        tap(result => {
-          console.log('Export List got...');
-          console.log(result);
-        }),
-        catchError(this.handleError<ExportItem[]>('getWholeExportList', []))
-      );*/
-
     return this.httpClient.get<any>(`${this.expensesUrl}/getWholeExportList`)
       .pipe(
         map(data => data.content.exportList),
@@ -136,15 +100,6 @@ export class ExpenseService {
 
   getExportList(parameter: SearchExportCriteria): Observable<ExportItem[]> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
-
-    /*return this.httpClient.post<ExportItem[]>(`${this.expensesUrl}/getExportList`, parameter)
-      .pipe(
-        tap(result => {
-          console.log('Export List got...');
-          console.log(result);
-        }),
-        catchError(this.handleError<ExportItem[]>('getExportList', []))
-      );*/
 
     return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, {
       date: (parameter.date ? parameter.date.format('YYYYMMDD') : null)
@@ -161,53 +116,33 @@ export class ExpenseService {
   getExportItemFile(parameter: DownloadExportCriteria): Observable<Blob> {
     console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    /*return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, parameter, { responseType: 'blob' })
-      .pipe(
-        tap(result => {
-          console.log('Export Item File got...');
-          console.log(result);
-        }),
-        catchError(this.handleError('getExportItemFile', new Blob(['"SeqNo","ExpenseId","ApplicationNo"\r\n'], { type: 'application/octet-stream' })))
-      );*/
-
     return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, parameter, { responseType: 'blob' })
       .pipe(
         tap(result => {
           console.log('Export Item File got...');
           console.log(result);
         }),
-        catchError(this.handleError('getExportItemFile', new Blob(['"SeqNo","ExpenseId","ApplicationNo"\r\n'], { type: 'application/octet-stream' })))
+        catchError(this.handleError('getExportItemFile', new Blob(['"Failed to get Export Item File"\r\n'], { type: 'application/octet-stream' })))
       );
   }
 
   getAllDuplicateInvoices(): Observable<DuplicateInvoice[]> {
-    return this.httpClient.get<DuplicateInvoice[]>(`${this.expensesUrl}/getAllDuplicateInvoices`)
-      .pipe(
-        tap(duplicateInvoices => {
-          console.log('Duplicate Invoices got...');
-          console.log(duplicateInvoices);
-        }),
-        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', MockData.duplicateInvoices))
-      );
-
-    /*return this.httpClient.get<any>(`${this.expensesUrl}/getAllDuplicateInvoices`)
+    return this.httpClient.get<any>(`${this.expensesUrl}/getAllDuplicateInvoices`)
       .pipe(
         map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
           return {
-            id: duplicateInvoice.RequestId,
-            applicationDate: duplicateInvoice.AppDate,
+            id: duplicateInvoice.Id,
             applicationNo: duplicateInvoice.ApplicationNo,
-            payee: duplicateInvoice.PayeeName,
-            status: data.content.duplicateInvoicesStatus[index],
-            selected: false
+            applicationDate: duplicateInvoice.ApplicationDate,
+            payee: duplicateInvoice.Payee
           };
         })),
         tap(duplicateInvoices => {
           console.log('Duplicate Invoices got...');
           console.log(duplicateInvoices);
         }),
-        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', MockData.duplicateInvoices))
-      );*/
+        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', []))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

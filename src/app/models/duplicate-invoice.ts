@@ -1,7 +1,7 @@
 export class DuplicateInvoice {
     id: number;
-    documentDate: string;
     documentNo: string;
+    documentDate: string;
     payee: string;
     applicationNos: string;
 }
