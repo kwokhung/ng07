@@ -132,9 +132,10 @@ export class ExpenseService {
         map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
           return {
             id: duplicateInvoice.Id,
-            applicationNo: duplicateInvoice.ApplicationNo,
-            applicationDate: duplicateInvoice.ApplicationDate,
-            payee: duplicateInvoice.Payee
+            documentNo: duplicateInvoice.DocumentNo,
+            documentDate: duplicateInvoice.DocumentDate,
+            payee: duplicateInvoice.Payee,
+            applicationNos: duplicateInvoice.ApplicationNos
           };
         })),
         tap(duplicateInvoices => {
