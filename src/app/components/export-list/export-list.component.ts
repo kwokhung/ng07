@@ -42,7 +42,7 @@ export class ExportListComponent implements OnInit {
 
     /*this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     this.expenseService.getWholeExportList()
       .subscribe(
@@ -56,7 +56,7 @@ export class ExportListComponent implements OnInit {
   async search(parameter: SearchExportCriteria) {
     this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     this.expenseService.getExportList(parameter)
       .subscribe(
@@ -71,7 +71,7 @@ export class ExportListComponent implements OnInit {
     //alert(`${exportItem.id}: clicked`);
     this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     this.expenseService.getExportItemFile({ date: exportItem.date, batchNo: exportItem.batchNo })
       .subscribe(
@@ -109,10 +109,6 @@ export class ExportListComponent implements OnInit {
         window.URL.revokeObjectURL(data);
       }, 100)
     }
-  }
-
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

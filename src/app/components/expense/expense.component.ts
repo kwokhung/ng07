@@ -40,7 +40,7 @@ export class ExpenseComponent implements OnInit {
 
     /*this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     this.expenseService.getAllExpenses()
       .subscribe(
@@ -54,7 +54,7 @@ export class ExpenseComponent implements OnInit {
   async search(parameter: SearchExpenseCriteria) {
     this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     this.expenseService.getExpenses(parameter)
       .subscribe(
@@ -76,7 +76,7 @@ export class ExpenseComponent implements OnInit {
   async export() {
     this.loaderService.showLoader();
 
-    await this.delay(1000);
+    await this.loaderService.delay(1000);
 
     let parameter: number[] = [];
 
@@ -102,10 +102,6 @@ export class ExpenseComponent implements OnInit {
           this.router.navigateByUrl('/export-list');
         }
       );
-  }
-
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

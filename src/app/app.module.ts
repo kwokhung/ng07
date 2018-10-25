@@ -60,7 +60,8 @@ export const MY_FORMATS = {
     HttpClientModule
   ],
   providers: [
-    ExpenseService, LoaderService,
+    ExpenseService,
+    LoaderService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
