@@ -22,7 +22,7 @@ export class DuplicateInvoiceComponent implements OnInit {
   async ngOnInit() {
     this.loaderService.showLoader();
 
-    await this.loaderService.delay(1000);
+    //await this.loaderService.delay(1000);
 
     this.expenseService.getAllDuplicateInvoices()
       .subscribe(
