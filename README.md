@@ -3,6 +3,7 @@ npm install -g @angular/cli
 ng new ng07
 
 ng serve --open
+ng serve --open --prod
 
 npm install --save-dev electron
 npm install --save-dev electron-builder
