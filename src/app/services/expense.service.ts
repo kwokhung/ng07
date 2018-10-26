@@ -147,6 +147,14 @@ export class ExpenseService {
       );
   }
 
+  expensesInCart(): number[] {
+    return this.expenseCart;
+  }
+
+  isExpenseInCart(id: number): boolean {
+    return this.expenseCart.includes(id);
+  }
+
   addExpenseToCart(id: number) {
     console.log(id);
 
@@ -167,8 +175,8 @@ export class ExpenseService {
     console.log(this.expenseCart);
   }
 
-  expenseInCart(id: number): boolean {
-    return this.expenseCart.includes(id);
+  clearExpenseCart() {
+    this.expenseCart = [];
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

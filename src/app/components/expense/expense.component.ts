@@ -62,7 +62,7 @@ export class ExpenseComponent implements OnInit {
           this.expenses = expenses;
 
           this.expenses.forEach(item => {
-            if (this.expenseService.expenseInCart(item.id)) {
+            if (this.expenseService.isExpenseInCart(item.id)) {
               item.selected = true;
             }
           });
@@ -98,14 +98,8 @@ export class ExpenseComponent implements OnInit {
       .subscribe(
         result => {
           console.log(`result: ${JSON.stringify(result)}`);
-          /*this.expenseService.getExpenses(this.searchForm.value)
-            .subscribe(
-              expenses => {
-                this.expenses = expenses;
-                this.loaderService.hideLoader();
-              }
-            );*/
           this.loaderService.hideLoader();
+          this.expenseService.clearExpenseCart();
           this.router.navigateByUrl('/export-list');
         }
       );
