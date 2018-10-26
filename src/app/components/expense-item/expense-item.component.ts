@@ -1,5 +1,8 @@
 import { Component, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { Expense } from '../../models/expense';
+
+import { ExpenseService } from '../../services/expense.service';
 
 @Component({
   selector: 'app-expense-item',
@@ -13,11 +16,17 @@ export class ExpenseItemComponent implements OnInit {
 
   nativeElement: any;
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, private expenseService: ExpenseService) {
     this.nativeElement = element.nativeElement;
   }
 
   ngOnInit() {
+    if (this.expense.selected) {
+      //console.log(this.nativeElement);
+      //console.log(this.nativeElement.querySelector('input[type=checkbox]'));
+      this.nativeElement.querySelector('input[type=checkbox]').checked = true;
+    }
+
     if (this.expense.status === 'Exported') {
       //console.log(this.nativeElement);
       //console.log(this.nativeElement.querySelector('.card'));
@@ -28,7 +37,16 @@ export class ExpenseItemComponent implements OnInit {
 
   click(e) {
     //alert(`${this.expense.id}: ${e.target.checked ? 'checked' : 'unchecked'}`);
-    this.expense.selected = (e.target.checked ? true : false);
+
+    this.expense.selected = e.target.checked;
+
+    if (this.expense.selected) {
+      this.expenseService.addExpenseToCart(this.expense.id);
+    }
+    else {
+      this.expenseService.removeExpenseFromCart(this.expense.id);
+    }
+
     this.clicked.emit(this.expense);
   }
 }

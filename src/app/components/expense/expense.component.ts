@@ -60,6 +60,13 @@ export class ExpenseComponent implements OnInit {
       .subscribe(
         expenses => {
           this.expenses = expenses;
+
+          this.expenses.forEach(item => {
+            if (this.expenseService.expenseInCart(item.id)) {
+              item.selected = true;
+            }
+          });
+
           this.loaderService.hideLoader();
         }
       );

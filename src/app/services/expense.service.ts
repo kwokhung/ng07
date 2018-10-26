@@ -20,6 +20,7 @@ export class ExpenseService {
 
   expensesUrl = environment.expensesUrl;
   expenses: Expense[] = [];
+  expenseCart: number[] = [];
 
   constructor(private httpClient: HttpClient) {
     this.expenses = MockData.expenses;
@@ -144,6 +145,30 @@ export class ExpenseService {
         }),
         catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', []))
       );
+  }
+
+  addExpenseToCart(id: number) {
+    console.log(id);
+
+    if (!this.expenseCart.includes(id)) {
+      this.expenseCart.push(id);
+    }
+
+    console.log(this.expenseCart);
+  }
+
+  removeExpenseFromCart(id: number) {
+    console.log(id);
+
+    if (this.expenseCart.includes(id)) {
+      this.expenseCart = this.expenseCart.filter(item => item !== id);
+    }
+
+    console.log(this.expenseCart);
+  }
+
+  expenseInCart(id: number): boolean {
+    return this.expenseCart.includes(id);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
