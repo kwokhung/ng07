@@ -204,7 +204,12 @@ export class ExpenseService {
       ));
     });
 
-    return forkJoin(expenses);
+    if (expenses.length > 0) {
+      return forkJoin(expenses);
+    }
+    else {
+      return of([]);
+    }
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

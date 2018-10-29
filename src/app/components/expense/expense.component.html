@@ -41,8 +41,7 @@
               <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
             </ul>
             <div class="text-center">
-              <button type="button" class="btn btn-success" (click)="export()">Export</button>
-              <button type="button" class="btn btn-success" routerLink="/expense-to-be-exported">Go To Cart</button>
+              <button type="button" class="btn btn-success" routerLink="/expense-to-be-exported">Export</button>
             </div>
           </div>
         </div>
