@@ -128,23 +128,24 @@ export class ExpenseService {
   }
 
   getAllDuplicateInvoices(): Observable<DuplicateInvoice[]> {
-    return this.httpClient.get<any>(`${this.expensesUrl}/getAllDuplicateInvoices`)
-      .pipe(
-        map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
-          return {
-            id: duplicateInvoice.Id,
-            documentNo: duplicateInvoice.DocumentNo,
-            documentDate: duplicateInvoice.DocumentDate,
-            payee: duplicateInvoice.Payee,
-            applicationNos: duplicateInvoice.ApplicationNos
-          };
-        })),
-        tap(duplicateInvoices => {
-          console.log('Duplicate Invoices got...');
-          console.log(duplicateInvoices);
-        }),
-        catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', []))
-      );
+    return this.httpClient.post<any>(`${this.expensesUrl}/getAllDuplicateInvoices`, {
+      operationCondition: environment.operationCondition
+    }).pipe(
+      map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
+        return {
+          id: duplicateInvoice.Id,
+          documentNo: duplicateInvoice.DocumentNo,
+          documentDate: duplicateInvoice.DocumentDate,
+          payee: duplicateInvoice.Payee,
+          applicationNos: duplicateInvoice.ApplicationNos
+        };
+      })),
+      tap(duplicateInvoices => {
+        console.log('Duplicate Invoices got...');
+        console.log(duplicateInvoices);
+      }),
+      catchError(this.handleError<DuplicateInvoice[]>('getAllDuplicateInvoices', []))
+    );
   }
 
   expensesInCart(): number[] {
