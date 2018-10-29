@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">{{title}}</h1>
+    <div class="text-center">
+      <app-loader>Loading...</app-loader>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card bg-secondary text-white" *ngIf="expenses.length !== 0">
+          <div class="card-body">
+            <h4 class="card-title">Expense Items To Be Exported</h4>
+            <ul>
+              <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
+            </ul>
+            <div class="text-center">
+              <button type="button" class="btn btn-success" (click)="export()">Export</button>
+              <button type="button" class="btn btn-success" routerLink="/expense-to-be-exported">Go To Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

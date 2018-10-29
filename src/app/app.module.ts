@@ -16,6 +16,7 @@ import { ExportListComponent } from './components/export-list/export-list.compon
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExportItemComponent } from './components/export-item/export-item.component';
 import { DuplicateInvoiceComponent } from './components/duplicate-invoice/duplicate-invoice.component';
+import { ExpenseToBeExportedComponent } from './components/expense-to-be-exported/expense-to-be-exported.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
@@ -45,8 +46,9 @@ export const MY_FORMATS = {
     ExportItemComponent,
     LoaderComponent,
     DuplicateInvoiceComponent,
-    FormatDatePipe,
-    DuplicateInvoiceItemComponent
+    DuplicateInvoiceItemComponent,
+    ExpenseToBeExportedComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,

@@ -179,6 +179,10 @@ export class ExpenseService {
     this.expenseCart = [];
   }
 
+  getExpensesFromCart(): Observable<Expense[]> {
+    return of([]);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation}: ${JSON.stringify(error)}`);
