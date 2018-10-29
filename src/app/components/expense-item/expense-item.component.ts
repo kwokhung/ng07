@@ -40,13 +40,6 @@ export class ExpenseItemComponent implements OnInit {
 
     this.expense.selected = e.target.checked;
 
-    if (this.expense.selected) {
-      this.expenseService.addExpenseToCart(this.expense.id);
-    }
-    else {
-      this.expenseService.removeExpenseFromCart(this.expense.id);
-    }
-
     this.clicked.emit(this.expense);
   }
 }

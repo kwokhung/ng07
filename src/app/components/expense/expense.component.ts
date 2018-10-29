@@ -75,6 +75,13 @@ export class ExpenseComponent implements OnInit {
   clickItem(expense: Expense) {
     //alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
 
+    if (expense.selected) {
+      this.expenseService.addExpenseToCart(expense.id);
+    }
+    else {
+      this.expenseService.removeExpenseFromCart(expense.id);
+    }
+
     this.expenses.forEach(item => {
       console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
     });
