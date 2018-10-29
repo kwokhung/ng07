@@ -27,6 +27,7 @@ export class ExpenseToBeExportedComponent implements OnInit {
     this.expenseService.getExpensesFromCart()
       .subscribe(
         expenses => {
+          console.log(expenses);
           this.expenses = expenses;
           this.loaderService.hideLoader();
         }

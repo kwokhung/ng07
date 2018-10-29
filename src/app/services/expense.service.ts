@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -180,12 +180,36 @@ export class ExpenseService {
   }
 
   getExpensesFromCart(): Observable<Expense[]> {
-    return of([]);
+    let expenses: Observable<Expense>[] = [];
+
+    this.expenseCart.forEach(item => {
+      expenses.push(this.httpClient.post<any>(`${this.expensesUrl}/getExpenseByRequestId`, {
+        id: item
+      }).pipe(
+        map(data => {
+          return {
+            id: data.content.expense.RequestId,
+            applicationDate: data.content.expense.AppDate,
+            applicationNo: data.content.expense.ApplicationNo,
+            payee: data.content.expense.PayeeName,
+            status: data.content.expenseStatus,
+            selected: true
+          };
+        }),
+        tap(expense => {
+          console.log('Expense got...');
+          console.log(expense);
+        }),
+        catchError(this.handleError<Expense>('getExpenseByRequestId', null))
+      ));
+    });
+
+    return forkJoin(expenses);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(`${operation}: ${JSON.stringify(error)}`);
+      console.error(`${operation}: ${error}`);
 
       return of(result as T);
     };
