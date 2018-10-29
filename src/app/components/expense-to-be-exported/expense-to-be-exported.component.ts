@@ -12,7 +12,7 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class ExpenseToBeExportedComponent implements OnInit {
 
-  title = 'Expense Voucher Export';
+  title = 'Expenses To Be Exported';
 
   expenses: Expense[] = [];
 

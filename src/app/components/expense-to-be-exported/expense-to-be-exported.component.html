@@ -8,7 +8,7 @@
       <div class="col-md-12">
         <div class="card bg-secondary text-white" *ngIf="expenses.length !== 0">
           <div class="card-body">
-            <h4 class="card-title">Expense Items To Be Exported</h4>
+            <h4 class="card-title">Expense Items</h4>
             <ul>
               <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
             </ul>
