@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Expense } from '../../models/expense';
 
@@ -16,7 +17,7 @@ export class ExpenseToBeExportedComponent implements OnInit {
 
   expenses: Expense[] = [];
 
-  constructor(private expenseService: ExpenseService, private loaderService: LoaderService) {
+  constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -47,6 +48,36 @@ export class ExpenseToBeExportedComponent implements OnInit {
     this.expenses.forEach(item => {
       console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
     });
+  }
+
+  async export() {
+    this.loaderService.showLoader();
+
+    //await this.loaderService.delay(1000);
+
+    let parameter: number[] = [];
+
+    this.expenses.forEach(item => {
+      if (item.selected) {
+        console.log(`${item.id} exported`);
+        parameter.push(item.id);
+      }
+    });
+
+    this.expenseService.requestToExport(parameter)
+      .subscribe(
+        result => {
+          console.log(`result: ${JSON.stringify(result)}`);
+          this.loaderService.hideLoader();
+          this.expenseService.clearExpenseCart();
+          this.router.navigateByUrl('/export-list');
+        }
+      );
+  }
+
+  cancel() {
+    this.expenseService.clearExpenseCart();
+    this.router.navigateByUrl('/');
   }
 
 }

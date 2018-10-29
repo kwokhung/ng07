@@ -87,29 +87,4 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
-  async export() {
-    this.loaderService.showLoader();
-
-    //await this.loaderService.delay(1000);
-
-    let parameter: number[] = [];
-
-    this.expenses.forEach(item => {
-      if (item.selected) {
-        console.log(`${item.id} exported`);
-        parameter.push(item.id);
-      }
-    });
-
-    this.expenseService.requestToExport(parameter)
-      .subscribe(
-        result => {
-          console.log(`result: ${JSON.stringify(result)}`);
-          this.loaderService.hideLoader();
-          this.expenseService.clearExpenseCart();
-          this.router.navigateByUrl('/export-list');
-        }
-      );
-  }
-
 }
