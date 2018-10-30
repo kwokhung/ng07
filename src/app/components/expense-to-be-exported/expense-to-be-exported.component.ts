@@ -21,6 +21,7 @@ export class ExpenseToBeExportedComponent implements OnInit, AfterViewChecked {
   title = 'Expenses To Be Exported';
 
   expenses: Expense[] = [];
+  firstTime: boolean = true;
 
   nativeElement: any;
 
@@ -44,8 +45,16 @@ export class ExpenseToBeExportedComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    if (this.checkAll !== undefined) {
-      this.checkAll.nativeElement.checked = true;
+    if (this.checkAll !== undefined && this.firstTime) {
+      if (this.expenses.every(item => item.selected)) {
+        this.checkAll.nativeElement.checked = true;
+      }
+
+      if (this.expenses.every(item => !item.selected)) {
+        this.checkAll.nativeElement.checked = false;
+      }
+      
+      this.firstTime = false;
     }
   }
 
