@@ -45,9 +45,9 @@ export class ExpenseToBeExportedComponent implements OnInit {
       this.expenseService.removeExpenseFromCart(expense.id);
     }
 
-    this.expenses.forEach(item => {
-      console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
-    });
+    //this.expenses.forEach(item => {
+      //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
+    //});
   }
 
   async export() {
@@ -59,7 +59,7 @@ export class ExpenseToBeExportedComponent implements OnInit {
 
     this.expenses.forEach(item => {
       if (item.selected) {
-        console.log(`${item.id} exported`);
+        //console.log(`${item.id} exported`);
         parameter.push(item.id);
       }
     });
@@ -67,7 +67,7 @@ export class ExpenseToBeExportedComponent implements OnInit {
     this.expenseService.requestToExport(parameter)
       .subscribe(
         result => {
-          console.log(`result: ${JSON.stringify(result)}`);
+          //console.log(`result: ${JSON.stringify(result)}`);
           this.loaderService.hideLoader();
           this.expenseService.clearExpenseCart();
           this.router.navigateByUrl('/export-list');

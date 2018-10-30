@@ -40,6 +40,14 @@ export class ExpenseItemComponent implements OnInit {
 
     this.expense.selected = e.target.checked;
 
+    if (this.expense.selected) {
+      this.nativeElement.querySelector('input[type=checkbox]').checked = true;
+    }
+    else {
+      this.nativeElement.querySelector('input[type=checkbox]').checked = false;
+    }
+
     this.clicked.emit(this.expense);
   }
+
 }

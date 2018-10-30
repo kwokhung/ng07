@@ -49,7 +49,7 @@ export class ExpenseService {
   }
 
   getExpenses(parameter: SearchExpenseCriteria): Observable<Expense[]> {
-    console.log(`parameter: ${JSON.stringify(parameter)}`);
+    //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, {
       operationCondition: environment.operationCondition,
@@ -76,7 +76,7 @@ export class ExpenseService {
   }
 
   requestToExport(parameter: number[]): Observable<any> {
-    console.log(`parameter: ${JSON.stringify(parameter)}`);
+    //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, {
       operationCondition: environment.operationCondition,
@@ -104,7 +104,7 @@ export class ExpenseService {
   }
 
   getExportList(parameter: SearchExportCriteria): Observable<ExportItem[]> {
-    console.log(`parameter: ${JSON.stringify(parameter)}`);
+    //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, {
       operationCondition: environment.operationCondition,
@@ -120,7 +120,7 @@ export class ExpenseService {
   }
 
   getExportItemFile(parameter: DownloadExportCriteria): Observable<Blob> {
-    console.log(`parameter: ${JSON.stringify(parameter)}`);
+    //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
     return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, {
       operationCondition: environment.operationCondition,
@@ -165,23 +165,23 @@ export class ExpenseService {
   }
 
   addExpenseToCart(id: number) {
-    console.log(id);
+    //console.log(id);
 
     if (!this.expenseCart.includes(id)) {
       this.expenseCart.push(id);
     }
 
-    console.log(this.expenseCart);
+    //console.log(this.expenseCart);
   }
 
   removeExpenseFromCart(id: number) {
-    console.log(id);
+    //console.log(id);
 
     if (this.expenseCart.includes(id)) {
       this.expenseCart = this.expenseCart.filter(item => item !== id);
     }
 
-    console.log(this.expenseCart);
+    //console.log(this.expenseCart);
   }
 
   clearExpenseCart() {

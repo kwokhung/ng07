@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+
+import { ExpenseItemComponent } from '../expense-item/expense-item.component';
 
 import { Expense } from '../../models/expense';
 import { SearchExpenseCriteria } from '../../models/search-expense-criteria';
@@ -14,6 +16,8 @@ import { LoaderService } from '../../services/loader.service';
   styleUrls: ['./expense.component.css']
 })
 export class ExpenseComponent implements OnInit {
+
+  @ViewChildren(ExpenseItemComponent) exportItems: QueryList<ExpenseItemComponent>;
 
   title = 'Expense Voucher Export';
 
@@ -51,6 +55,15 @@ export class ExpenseComponent implements OnInit {
       );*/
   }
 
+  click(e) {
+    //alert(`${e.target.checked ? 'checked' : 'unchecked'}`);
+
+    this.exportItems.forEach(exportItem => {
+      //console.log(exportItem);
+      exportItem.click(e);
+    });
+  }
+
   async search(parameter: SearchExpenseCriteria) {
     this.loaderService.showLoader();
 
@@ -82,9 +95,9 @@ export class ExpenseComponent implements OnInit {
       this.expenseService.removeExpenseFromCart(expense.id);
     }
 
-    this.expenses.forEach(item => {
-      console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
-    });
+    //this.expenses.forEach(item => {
+      //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
+    //});
   }
 
 }
