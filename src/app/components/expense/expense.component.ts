@@ -55,12 +55,12 @@ export class ExpenseComponent implements OnInit {
       );*/
   }
 
-  click(e) {
+  clickAll(e) {
     //alert(`${e.target.checked ? 'checked' : 'unchecked'}`);
 
     this.exportItems.forEach(exportItem => {
       //console.log(exportItem);
-      exportItem.click(e);
+      exportItem.setChecked(e.target.checked);
     });
   }
 
@@ -85,7 +85,7 @@ export class ExpenseComponent implements OnInit {
       );
   }
 
-  clickItem(expense: Expense) {
+  itemClicked(expense: Expense) {
     //alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
 
     if (expense.selected) {

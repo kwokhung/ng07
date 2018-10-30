@@ -40,6 +40,14 @@ export class ExpenseItemComponent implements OnInit {
 
     this.expense.selected = e.target.checked;
 
+    this.clicked.emit(this.expense);
+  }
+
+  setChecked(checked: boolean) {
+    //alert(`${this.expense.id}: ${checked ? 'checked' : 'unchecked'}`);
+
+    this.expense.selected = checked;
+
     if (this.expense.selected) {
       this.nativeElement.querySelector('input[type=checkbox]').checked = true;
     }

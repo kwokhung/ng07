@@ -8,9 +8,14 @@
       <div class="col-md-12">
         <div class="card bg-secondary text-white" *ngIf="expenses.length !== 0">
           <div class="card-body">
-            <h4 class="card-title">Expense Items</h4>
+            <div class="clearfix">
+              <span class="checkbox float-left">
+                <input type="checkbox" (click)="clickAll($event)">
+              </span>
+              <h4 class="card-title float-left">Expense Items</h4>
+            </div>
             <ul>
-              <app-expense-item [expense]="expense" (clicked)="clickItem($event)" *ngFor="let expense of expenses"></app-expense-item>
+              <app-expense-item [expense]="expense" (clicked)="itemClicked($event)" *ngFor="let expense of expenses"></app-expense-item>
             </ul>
             <div class="text-center">
               <button type="button" class="btn btn-success" (click)="export()">Proceed</button>

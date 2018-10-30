@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { ExpenseItemComponent } from '../expense-item/expense-item.component';
 
 import { Expense } from '../../models/expense';
 
@@ -13,6 +15,8 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class ExpenseToBeExportedComponent implements OnInit {
 
+  @ViewChildren(ExpenseItemComponent) exportItems: QueryList<ExpenseItemComponent>;
+  
   title = 'Expenses To Be Exported';
 
   expenses: Expense[] = [];
@@ -35,7 +39,16 @@ export class ExpenseToBeExportedComponent implements OnInit {
       );
   }
 
-  clickItem(expense: Expense) {
+  clickAll(e) {
+    //alert(`${e.target.checked ? 'checked' : 'unchecked'}`);
+
+    this.exportItems.forEach(exportItem => {
+      //console.log(exportItem);
+      exportItem.setChecked(e.target.checked);
+    });
+  }
+
+  itemClicked(expense: Expense) {
     //alert(`${expense.id}: ${expense.selected ? 'checked' : 'unchecked'}`);
 
     if (expense.selected) {
