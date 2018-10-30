@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ExpenseItemComponent } from '../expense-item/expense-item.component';
@@ -13,15 +13,19 @@ import { LoaderService } from '../../services/loader.service';
   templateUrl: './expense-to-be-exported.component.html',
   styleUrls: ['./expense-to-be-exported.component.css']
 })
-export class ExpenseToBeExportedComponent implements OnInit {
+export class ExpenseToBeExportedComponent implements OnInit, AfterViewChecked {
 
+  @ViewChild('checkAll') checkAll: ElementRef;
   @ViewChildren(ExpenseItemComponent) exportItems: QueryList<ExpenseItemComponent>;
-  
+
   title = 'Expenses To Be Exported';
 
   expenses: Expense[] = [];
 
-  constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
+  nativeElement: any;
+
+  constructor(private element: ElementRef, private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
+    this.nativeElement = element.nativeElement;
   }
 
   ngOnInit() {
@@ -37,6 +41,12 @@ export class ExpenseToBeExportedComponent implements OnInit {
           this.loaderService.hideLoader();
         }
       );
+  }
+
+  ngAfterViewChecked() {
+    if (this.checkAll !== undefined) {
+      this.checkAll.nativeElement.checked = true;
+    }
   }
 
   clickAll(e) {
@@ -59,8 +69,20 @@ export class ExpenseToBeExportedComponent implements OnInit {
     }
 
     //this.expenses.forEach(item => {
-      //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
+    //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
     //});
+
+    if (this.expenses.every(item => item.selected)) {
+      //console.log('all checked');
+      //this.nativeElement.querySelector('input[type=checkbox]').checked = true;
+      this.checkAll.nativeElement.checked = true;
+    }
+
+    if (this.expenses.every(item => !item.selected)) {
+      //console.log('all unchecked');
+      //this.nativeElement.querySelector('input[type=checkbox]').checked = false;
+      this.checkAll.nativeElement.checked = false;
+    }
   }
 
   async export() {
