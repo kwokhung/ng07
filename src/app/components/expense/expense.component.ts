@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -17,6 +17,7 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class ExpenseComponent implements OnInit {
 
+  @ViewChild('checkAll') checkAll: ElementRef;
   @ViewChildren(ExpenseItemComponent) exportItems: QueryList<ExpenseItemComponent>;
 
   title = 'Expense Voucher Export';
@@ -28,7 +29,10 @@ export class ExpenseComponent implements OnInit {
 
   expenses: Expense[] = [];
 
-  constructor(private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
+  nativeElement: any;
+
+  constructor(private element: ElementRef, private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
+    this.nativeElement = element.nativeElement;
   }
 
   async ngOnInit() {
@@ -96,8 +100,20 @@ export class ExpenseComponent implements OnInit {
     }
 
     //this.expenses.forEach(item => {
-      //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
+    //console.log(`${item.id}: ${item.selected ? 'checked' : 'unchecked'}`);
     //});
+
+    if (this.expenses.every(item => item.selected)) {
+      //console.log('all checked');
+      //this.nativeElement.querySelector('input[type=checkbox]').checked = true;
+      this.checkAll.nativeElement.checked = true;
+    }
+
+    if (this.expenses.every(item => !item.selected)) {
+      //console.log('all unchecked');
+      //this.nativeElement.querySelector('input[type=checkbox]').checked = false;
+      this.checkAll.nativeElement.checked = false;
+    }
   }
 
 }
