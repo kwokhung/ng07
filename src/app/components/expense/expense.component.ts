@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -15,7 +15,7 @@ import { LoaderService } from '../../services/loader.service';
   templateUrl: './expense.component.html',
   styleUrls: ['./expense.component.css']
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('checkAll') checkAll: ElementRef;
   @ViewChildren(ExpenseItemComponent) exportItems: QueryList<ExpenseItemComponent>;
@@ -28,7 +28,8 @@ export class ExpenseComponent implements OnInit {
   payee: FormControl;
 
   expenses: Expense[] = [];
-
+  firstTime: boolean = true;
+  
   nativeElement: any;
 
   constructor(private element: ElementRef, private router: Router, private expenseService: ExpenseService, private loaderService: LoaderService) {
@@ -57,6 +58,20 @@ export class ExpenseComponent implements OnInit {
           this.loaderService.hideLoader();
         }
       );*/
+  }
+
+  ngAfterViewChecked() {
+    if (this.checkAll !== undefined && this.firstTime) {
+      if (this.expenses.every(item => item.selected)) {
+        this.checkAll.nativeElement.checked = true;
+      }
+
+      if (this.expenses.every(item => !item.selected)) {
+        this.checkAll.nativeElement.checked = false;
+      }
+
+      this.firstTime = false;
+    }
   }
 
   clickAll(e) {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, SimpleChanges, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ExpenseItemComponent } from '../expense-item/expense-item.component';
@@ -53,7 +53,7 @@ export class ExpenseToBeExportedComponent implements OnInit, AfterViewChecked {
       if (this.expenses.every(item => !item.selected)) {
         this.checkAll.nativeElement.checked = false;
       }
-      
+
       this.firstTime = false;
     }
   }
