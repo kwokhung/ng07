@@ -224,7 +224,8 @@ export class ExpenseService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(`${operation}: ${error}`);
+      console.error(`${operation}: ${error} (raw)`);
+      console.error(`${operation}: ${JSON.stringify(error)} (json)`);
 
       return of(result as T);
     };
