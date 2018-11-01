@@ -14,7 +14,7 @@ import { LoginParameter } from 'src/app/models/login-parameter';
 })
 export class LoginComponent implements OnInit {
 
-  invalidLogin: boolean;
+  invalidLogin: boolean = false;
   title = 'Login';
 
   loginForm: FormGroup;
@@ -46,13 +46,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         token => {
           if (token) {
-            localStorage.setItem("jwt", token);
-
-            this.invalidLogin = false;
             this.router.navigateByUrl('/');
           }
           else {
-            alert('Login failed.');
             this.invalidLogin = true;
           }
 

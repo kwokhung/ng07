@@ -95,9 +95,9 @@ export class ExpenseService {
       operationCondition: environment.operationCondition
     }).pipe(
       map(data => data.content.exportList),
-      tap(result => {
+      tap(exportItems => {
         console.log('Export List got...');
-        console.log(result);
+        console.log(exportItems);
       }),
       catchError(this.handleError<ExportItem[]>('getWholeExportList', []))
     );
@@ -111,9 +111,9 @@ export class ExpenseService {
       date: (parameter.date ? parameter.date.format('YYYYMMDD') : null)
     }).pipe(
       map(data => data.content.exportList),
-      tap(result => {
+      tap(exportItems => {
         console.log('Export List got...');
-        console.log(result);
+        console.log(exportItems);
       }),
       catchError(this.handleError<ExportItem[]>('getExportList', []))
     );
@@ -127,9 +127,9 @@ export class ExpenseService {
       date: parameter.date,
       batchNo: parameter.batchNo
     }, { responseType: 'blob' }).pipe(
-      tap(result => {
+      tap(file => {
         console.log('Export Item File got...');
-        console.log(result);
+        console.log(file);
       }),
       catchError(this.handleError('getExportItemFile', new Blob(['"Failed to get Export Item File"\r\n'], { type: 'application/octet-stream' })))
     );

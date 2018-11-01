@@ -19,6 +19,9 @@ export class AuthenticationService {
 
   login(parameter: LoginParameter): Observable<any> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
+    let token: any = {};
+    localStorage.setItem("jwt", token);
+    return of(token);
 
     return this.httpClient.post<any>(`${this.authenticationUrl}/login`, {
       operationCondition: environment.operationCondition,
@@ -26,11 +29,15 @@ export class AuthenticationService {
       password: parameter.password
     }).pipe(
       map(data => data.content.token),
-      tap(result => {
+      tap(token => {
         console.log('Login...');
-        console.log(result);
+        console.log(token);
+
+        if (token) {
+          localStorage.setItem("jwt", token);
+        }
       }),
-      catchError(this.handleError<any>('login', {}))
+      catchError(this.handleError<any>('login', null))
     );
   }
 
