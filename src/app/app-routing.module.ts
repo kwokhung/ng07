@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { HomeComponent } from './components/home/home.component';
 import { ExportListComponent } from './components/export-list/export-list.component';
 import { DuplicateInvoiceComponent } from './components/duplicate-invoice/duplicate-invoice.component';
 import { ExpenseToBeExportedComponent } from './components/expense-to-be-exported/expense-to-be-exported.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'export-list', component: ExportListComponent },
-  { path: 'duplicate-invoice', component: DuplicateInvoiceComponent },
-  { path: 'expense-to-be-exported', component: ExpenseToBeExportedComponent }
+  { path: '', component: HomeComponent, canActivate: [AuthenticationGuard] },
+  { path: 'export-list', component: ExportListComponent, canActivate: [AuthenticationGuard] },
+  { path: 'duplicate-invoice', component: DuplicateInvoiceComponent, canActivate: [AuthenticationGuard] },
+  { path: 'expense-to-be-exported', component: ExpenseToBeExportedComponent, canActivate: [AuthenticationGuard] },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

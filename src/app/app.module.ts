@@ -16,13 +16,14 @@ import { ExportListComponent } from './components/export-list/export-list.compon
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExportItemComponent } from './components/export-item/export-item.component';
 import { DuplicateInvoiceComponent } from './components/duplicate-invoice/duplicate-invoice.component';
+import { DuplicateInvoiceItemComponent } from './components/duplicate-invoice-item/duplicate-invoice-item.component';
 import { ExpenseToBeExportedComponent } from './components/expense-to-be-exported/expense-to-be-exported.component';
+import { LoginComponent } from './components/login/login.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
-import { DuplicateInvoiceItemComponent } from './components/duplicate-invoice-item/duplicate-invoice-item.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -48,6 +49,7 @@ export const MY_FORMATS = {
     DuplicateInvoiceComponent,
     DuplicateInvoiceItemComponent,
     ExpenseToBeExportedComponent,
+    LoginComponent,
     FormatDatePipe
   ],
   imports: [
