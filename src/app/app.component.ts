@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { AuthenticationService } from './services/authentication.service';
 
@@ -13,7 +14,7 @@ export class AppComponent {
 
   title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
 
   isAuthenticated(): boolean {
@@ -22,6 +23,7 @@ export class AppComponent {
 
   logout() {
     this.authenticationService.logout();
+    this.router.navigateByUrl('/login');
   }
 
 }
