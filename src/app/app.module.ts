@@ -22,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
+import { AuthenticationService } from './services/authentication.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
 
@@ -66,6 +67,7 @@ export const MY_FORMATS = {
   providers: [
     ExpenseService,
     LoaderService,
+    AuthenticationService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],

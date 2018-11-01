@@ -58,6 +58,7 @@ ng generate component components/expenseToBeExported
 ng generate component components/login
 ng generate service services/expense
 ng generate service services/loader
+ng generate service services/authentication
 ng generate class models/expense
 ng generate class models/exportItem
 ng generate class models/duplicateInvoice
@@ -66,5 +67,6 @@ ng generate interface models/searchCriteria
 ng generate interface models/searchExpenseCriteria
 ng generate interface models/searchExportCriteria
 ng generate interface models/downloadExportCriteria
+ng generate interface models/loginParameter
 ng generate pipe pipes/formatDate
 ng generate guard guards/authentication
