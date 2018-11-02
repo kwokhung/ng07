@@ -24,7 +24,7 @@ export class AuthenticationService {
     //return of(token);
 
     return this.httpClient.post<any>(`${this.authenticationUrl}/User/Login`, {
-      txtDomain: null,
+      txtDomain: parameter.domain,
       txtSamAccountName: parameter.userId,
       txtPassword: parameter.password
     }).pipe(

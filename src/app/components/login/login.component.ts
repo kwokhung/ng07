@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   title = 'Login';
 
   loginForm: FormGroup;
+  domain: FormControl;
   userId: FormControl;
   password: FormControl;
 
@@ -25,13 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = new FormControl(null, [
+    this.domain = new FormControl(null, [
       Validators.required,
-      this.regExValidator(/^admin$/i)
+      this.regExValidator(/^(MASONHK|D4331)$/i)
     ]);
+
+    this.userId = new FormControl(null, Validators.required);
+
     this.password = new FormControl(null, Validators.required);
 
     this.loginForm = new FormGroup({
+      'domain': this.domain,
       'userId': this.userId,
       'password': this.password
     });
