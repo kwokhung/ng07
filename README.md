@@ -41,6 +41,7 @@ npm install --save @angular/material@^6.1.0
 npm install --save @angular/cdk@^6.1.0
 npm install --save @angular/animations@^6.1.0
 npm install --save @angular/material-moment-adapter@^6.1.0
+#npm install --save angular2-jwt
 #npm install --save angular-font-awesome
 #npm install --save @fortawesome/fontawesome-svg-core
 #npm install --save @fortawesome/free-solid-svg-icons
