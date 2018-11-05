@@ -13,8 +13,6 @@ export class AuthenticationGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let token = localStorage.getItem("jwt");
-
     if (this.authenticationService.isAuthenticated()) {
       return true;
     }

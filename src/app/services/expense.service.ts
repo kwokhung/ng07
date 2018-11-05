@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
@@ -10,6 +10,8 @@ import { MockData } from '../models/mock-data';
 import { SearchExpenseCriteria } from '../models/search-expense-criteria';
 import { SearchExportCriteria } from '../models/search-export-criteria';
 import { DownloadExportCriteria } from '../models/download-export-criteria';
+
+import { AuthenticationService } from '../services/authentication.service';
 
 import { environment } from '../../environments/environment';
 
@@ -22,7 +24,7 @@ export class ExpenseService {
   expenses: Expense[] = [];
   expenseCart: number[] = [];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {
     this.expenses = MockData.expenses;
   }
 
@@ -56,7 +58,8 @@ export class ExpenseService {
       applicationDate: (parameter.applicationDate ? parameter.applicationDate.format('YYYYMMDD') : null),
       applicationNo: parameter.applicationNo,
       payee: parameter.payee
-    }).pipe(
+    }, { headers: this.authenticationService.addBearer(new HttpHeaders()) }
+    ).pipe(
       map(data => data.content.expenses.map((expense, index) => {
         return {
           id: expense.RequestId,

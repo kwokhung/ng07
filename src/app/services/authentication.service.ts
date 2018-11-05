@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, forkJoin, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { LoginParameter } from '../models/login-parameter';
 
@@ -49,7 +49,9 @@ export class AuthenticationService {
   isAuthenticated(): boolean {
     let token: any = localStorage.getItem("jwt");
 
-    if (token/* && !this.jwtHelper.isTokenExpired(token)*/) {
+    //console.log(`Token: ${token}`);
+
+    if (token) {
       return true;
     }
     else {
@@ -59,6 +61,18 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem("jwt");
+  }
+
+  addBearer(headers: HttpHeaders): HttpHeaders {
+    let token: any = localStorage.getItem("jwt");
+
+    //console.log(`Token: ${token}`);
+
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return headers;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
