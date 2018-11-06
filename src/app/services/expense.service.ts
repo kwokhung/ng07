@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -24,14 +25,19 @@ export class ExpenseService {
   expenses: Expense[] = [];
   expenseCart: number[] = [];
 
-  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private httpClient: HttpClient, private authenticationService: AuthenticationService) {
     this.expenses = MockData.expenses;
   }
 
   getAllExpenses(): Observable<Expense[]> {
     return this.httpClient.post<any>(`${this.expensesUrl}/getAllExpenses`, {
       operationCondition: environment.operationCondition
-    }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
+    ).pipe(
       map(data => data.content.expenses.map((expense, index) => {
         return {
           id: expense.RequestId,
@@ -58,7 +64,11 @@ export class ExpenseService {
       applicationDate: (parameter.applicationDate ? parameter.applicationDate.format('YYYYMMDD') : null),
       applicationNo: parameter.applicationNo,
       payee: parameter.payee
-    }, { headers: this.authenticationService.addBearer(new HttpHeaders()) }
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
     ).pipe(
       map(data => data.content.expenses.map((expense, index) => {
         return {
@@ -84,7 +94,12 @@ export class ExpenseService {
     return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, {
       operationCondition: environment.operationCondition,
       ids: parameter
-    }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
+    ).pipe(
       tap(result => {
         console.log('Export requested...');
         console.log(result);
@@ -96,7 +111,12 @@ export class ExpenseService {
   getWholeExportList(): Observable<ExportItem[]> {
     return this.httpClient.post<any>(`${this.expensesUrl}/getWholeExportList`, {
       operationCondition: environment.operationCondition
-    }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
+    ).pipe(
       map(data => data.content.exportList),
       tap(exportItems => {
         console.log('Export List got...');
@@ -112,7 +132,12 @@ export class ExpenseService {
     return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, {
       operationCondition: environment.operationCondition,
       date: (parameter.date ? parameter.date.format('YYYYMMDD') : null)
-    }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
+    ).pipe(
       map(data => data.content.exportList),
       tap(exportItems => {
         console.log('Export List got...');
@@ -129,7 +154,13 @@ export class ExpenseService {
       operationCondition: environment.operationCondition,
       date: parameter.date,
       batchNo: parameter.batchNo
-    }, { responseType: 'blob' }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        })),
+        responseType: 'blob'
+      }
+    ).pipe(
       tap(file => {
         console.log('Export Item File got...');
         console.log(file);
@@ -141,7 +172,12 @@ export class ExpenseService {
   getAllDuplicateInvoices(): Observable<DuplicateInvoice[]> {
     return this.httpClient.post<any>(`${this.expensesUrl}/getAllDuplicateInvoices`, {
       operationCondition: environment.operationCondition
-    }).pipe(
+    }, {
+        headers: this.authenticationService.addBearer(new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        }))
+      }
+    ).pipe(
       map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
         return {
           id: duplicateInvoice.Id,
@@ -198,7 +234,12 @@ export class ExpenseService {
       expenses.push(this.httpClient.post<any>(`${this.expensesUrl}/getExpenseByRequestId`, {
         operationCondition: environment.operationCondition,
         id: item
-      }).pipe(
+      }, {
+          headers: this.authenticationService.addBearer(new HttpHeaders({
+            'X-Requested-With': 'XMLHttpRequest'
+          }))
+        }
+      ).pipe(
         map(data => {
           return {
             id: data.content.expense.RequestId,
@@ -229,6 +270,15 @@ export class ExpenseService {
     return (error: any): Observable<T> => {
       console.error(`${operation}: ${error} (raw)`);
       console.error(`${operation}: ${JSON.stringify(error)} (json)`);
+
+      if (error.status && error.status === 401) {
+        if (error.error && error.error.errMsg) {
+          alert(JSON.stringify(error.error.errMsg));
+        }
+
+        this.authenticationService.logout();
+        this.router.navigateByUrl('/login');
+      }
 
       return of(result as T);
     };
