@@ -27,7 +27,12 @@ export class AuthenticationService {
       txtDomain: parameter.domain,
       txtSamAccountName: parameter.userId,
       txtPassword: parameter.password
-    }).pipe(
+    }, {
+        headers: new HttpHeaders({
+          'X-Requested-With': 'XMLHttpRequest'
+        })
+      }
+    ).pipe(
       tap(data => {
         console.log('Login...');
         console.log(data);
