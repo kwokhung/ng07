@@ -7,6 +7,8 @@ import { LoaderService } from '../../services/loader.service';
 
 import { LoginParameter } from 'src/app/models/login-parameter';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +16,6 @@ import { LoginParameter } from 'src/app/models/login-parameter';
 })
 export class LoginComponent implements OnInit {
 
-  invalidLogin: boolean = false;
   title = 'Login';
 
   loginForm: FormGroup;
@@ -22,14 +23,23 @@ export class LoginComponent implements OnInit {
   userId: FormControl;
   password: FormControl;
 
+  invalidLogin: boolean = false;
+
+  domains = [
+    'MASONHK',
+    'D4331'
+  ];
+
   constructor(private router: Router, private authenticationService: AuthenticationService, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
-    this.domain = new FormControl(null, [
+    this.domain = new FormControl(this.domains[environment.operationCondition])
+
+    /*this.domain = new FormControl(null, [
       Validators.required,
       this.regExValidator(/^(MASONHK|D4331)$/i)
-    ]);
+    ]);*/
 
     this.userId = new FormControl(null, Validators.required);
 
@@ -62,10 +72,10 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  private regExValidator(regEx: RegExp): ValidatorFn {
+  /*private regExValidator(regEx: RegExp): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       return (regEx.test(control.value) ? null : { 'regEx': { value: 'Field is invalid.' } });
     };
-  }
+  }*/
 
 }

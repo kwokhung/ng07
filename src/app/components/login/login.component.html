@@ -10,6 +10,14 @@
           <div *ngIf="invalidLogin" class="alert alert-danger">Invalid User Id. or Password.</div>
           <div class="form-group ">
             <label>Domain</label>
+            <select class="form-control" formControlName="domain">
+              <option *ngFor="let domain of domains" [ngValue]="domain">
+                {{ domain }}
+              </option>
+            </select>
+          </div>
+          <!--div class="form-group ">
+            <label>Domain</label>
             <input type="text" class="form-control" formControlName="domain">
             <div *ngIf="domain.invalid && (domain.dirty || domain.touched)" class="alert alert-danger">
               <div *ngIf="domain.errors.required">
@@ -19,7 +27,7 @@
                 {{domain.errors.regEx.value}}
               </div>
             </div>
-          </div>
+          </div-->
           <div class="form-group">
             <label>User Id.</label>
             <input type="text" class="form-control" formControlName="userId">
@@ -41,6 +49,12 @@
           <button type="submit" class="btn btn-primary" (click)="login(loginForm.value)" [disabled]="!loginForm.valid">Login</button>
         </form>
       </div>
+      <!--div class="col-md-12">
+        <label>
+          <strong>Login Form</strong>
+        </label>
+        <pre class="alert alert-dark">{{loginForm.value | json}}</pre>
+      </div-->
     </div>
   </div>
 </div>
