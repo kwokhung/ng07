@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,18 +26,6 @@ import { LoaderService } from './services/loader.service';
 import { AuthenticationService } from './services/authentication.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'YYYY/MM/DD',
-  },
-  display: {
-    dateInput: 'YYYY/MM/DD',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'YYYY/MM/DD',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
 
 @NgModule({
   declarations: [
@@ -68,8 +57,25 @@ export const MY_FORMATS = {
     ExpenseService,
     LoaderService,
     AuthenticationService,
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: 'YYYY/MM/DD',
+        },
+        display: {
+          dateInput: 'YYYY/MM/DD',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'YYYY/MM/DD',
+          monthYearA11yLabel: 'MMMM YYYY',
+        }
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
