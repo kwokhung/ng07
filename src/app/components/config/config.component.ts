@@ -55,25 +55,7 @@ export class ConfigComponent implements OnInit {
     localStorage.setItem('authenticationUrl', parameter.authenticationUrl);
     localStorage.setItem('expensesUrl', parameter.expensesUrl);
 
-    let operationCondition: string = localStorage.getItem('operationCondition');
-
-    if (operationCondition) {
-      environment.operationCondition = +operationCondition;
-    }
-
-    let authenticationUrl: string = localStorage.getItem('authenticationUrl');
-
-    if (authenticationUrl) {
-      environment.authenticationUrl = authenticationUrl;
-    }
-
-    let expensesUrl: string = localStorage.getItem('expensesUrl');
-
-    if (expensesUrl) {
-      environment.expensesUrl = expensesUrl;
-    }
-
-    this.appComponent.configChanged(parameter);
+    this.appComponent.ngOnInit();
     alert('Configuration is saved.');
 
     this.loaderService.hideLoader();
