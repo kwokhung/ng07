@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { LoaderService } from '../../services/loader.service';
+
+import { ConfigParameter } from 'src/app/models/config-parameter';
 
 import { environment } from '../../../environments/environment';
 
@@ -33,9 +35,9 @@ export class ConfigComponent implements OnInit {
   ngOnInit() {
     this.operationCondition = new FormControl(this.operationConditions[environment.operationCondition])
 
-    this.authenticationUrl = new FormControl(null, Validators.required);
+    this.authenticationUrl = new FormControl(environment.authenticationUrl, Validators.required);
 
-    this.expensesUrl = new FormControl(null, Validators.required);
+    this.expensesUrl = new FormControl(environment.expensesUrl, Validators.required);
 
     this.configForm = new FormGroup({
       'operationCondition': this.operationCondition,
@@ -44,10 +46,30 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-  config() {
+  config(parameter: ConfigParameter) {
     this.loaderService.showLoader();
 
-    //await this.loaderService.delay(1000);
+    localStorage.setItem('operationCondition', '' + parameter.operationCondition.value);
+    localStorage.setItem('authenticationUrl', parameter.authenticationUrl);
+    localStorage.setItem('expensesUrl', parameter.expensesUrl);
+
+    let operationCondition: string = localStorage.getItem('operationCondition');
+
+    if (operationCondition) {
+      environment.operationCondition = +operationCondition;
+    }
+
+    let authenticationUrl: string = localStorage.getItem('authenticationUrl');
+
+    if (authenticationUrl) {
+      environment.authenticationUrl = authenticationUrl;
+    }
+
+    let expensesUrl: string = localStorage.getItem('expensesUrl');
+
+    if (expensesUrl) {
+      environment.expensesUrl = expensesUrl;
+    }
 
     this.loaderService.hideLoader();
   }

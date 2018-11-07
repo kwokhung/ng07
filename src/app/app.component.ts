@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from './services/authentication.service';
 
@@ -18,19 +18,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    let operationCondition: string = localStorage.getItem("operationCondition");
+    let operationCondition: string = localStorage.getItem('operationCondition');
 
     if (operationCondition) {
       environment.operationCondition = +operationCondition;
     }
 
-    let authenticationUrl: string = localStorage.getItem("authenticationUrl");
+    let authenticationUrl: string = localStorage.getItem('authenticationUrl');
 
     if (authenticationUrl) {
       environment.authenticationUrl = authenticationUrl;
     }
 
-    let expensesUrl: string = localStorage.getItem("expensesUrl");
+    let expensesUrl: string = localStorage.getItem('expensesUrl');
 
     if (expensesUrl) {
       environment.expensesUrl = expensesUrl;

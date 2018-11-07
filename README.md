@@ -70,5 +70,6 @@ ng generate interface models/searchExpenseCriteria
 ng generate interface models/searchExportCriteria
 ng generate interface models/downloadExportCriteria
 ng generate interface models/loginParameter
+ng generate interface models/configParameter
 ng generate pipe pipes/formatDate
 ng generate guard guards/authentication

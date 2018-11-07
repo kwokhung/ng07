@@ -20,7 +20,7 @@ export class AuthenticationService {
   login(parameter: LoginParameter): Observable<any> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
     //let token: any = {};
-    //localStorage.setItem("jwt", token);
+    //localStorage.setItem('jwt', token);
     //return of(token);
 
     return this.httpClient.post<any>(`${this.authenticationUrl}/User/Login`, {
@@ -41,7 +41,7 @@ export class AuthenticationService {
           throw new Error(data.errMsg);
         }
         else if (data.content.token) {
-          localStorage.setItem("jwt", data.content.token);
+          localStorage.setItem('jwt', data.content.token);
         }
         else {
           throw new Error('Token is missing.');
@@ -53,12 +53,12 @@ export class AuthenticationService {
 
   refreshToken(data: any) {
     if (data.content.refreshtoken) {
-      localStorage.setItem("jwt", data.content.refreshtoken);
+      localStorage.setItem('jwt', data.content.refreshtoken);
     }
   }
 
   isAuthenticated(): boolean {
-    let token: any = localStorage.getItem("jwt");
+    let token: any = localStorage.getItem('jwt');
 
     //console.log(`Token: ${token}`);
 
@@ -71,11 +71,11 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
   }
 
   addBearer(headers: HttpHeaders): HttpHeaders {
-    let token: any = localStorage.getItem("jwt");
+    let token: any = localStorage.getItem('jwt');
 
     //console.log(`Token: ${token}`);
 
