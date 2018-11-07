@@ -38,6 +38,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       map(data => data.content.expenses.map((expense, index) => {
         return {
           id: expense.RequestId,
@@ -70,6 +73,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       map(data => data.content.expenses.map((expense, index) => {
         return {
           id: expense.RequestId,
@@ -100,6 +106,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       tap(result => {
         console.log('Export requested...');
         console.log(result);
@@ -117,6 +126,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       map(data => data.content.exportList),
       tap(exportItems => {
         console.log('Export List got...');
@@ -138,6 +150,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       map(data => data.content.exportList),
       tap(exportItems => {
         console.log('Export List got...');
@@ -178,6 +193,9 @@ export class ExpenseService {
         }))
       }
     ).pipe(
+      tap(data => {
+        this.authenticationService.refreshToken(data);
+      }),
       map(data => data.content.duplicateInvoices.map((duplicateInvoice, index) => {
         return {
           id: duplicateInvoice.Id,
@@ -240,6 +258,9 @@ export class ExpenseService {
           }))
         }
       ).pipe(
+        tap(data => {
+          this.authenticationService.refreshToken(data);
+        }),
         map(data => {
           return {
             id: data.content.expense.RequestId,

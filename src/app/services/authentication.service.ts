@@ -51,6 +51,12 @@ export class AuthenticationService {
     );
   }
 
+  refreshToken(data: any) {
+    if (data.content.refreshtoken) {
+      localStorage.setItem("jwt", data.content.refreshtoken);
+    }
+  }
+
   isAuthenticated(): boolean {
     let token: any = localStorage.getItem("jwt");
 
