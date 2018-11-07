@@ -57,6 +57,7 @@ ng generate component components/duplicateInvoice
 ng generate component components/duplicateInvoice-item
 ng generate component components/expenseToBeExported
 ng generate component components/login
+ng generate component components/config
 ng generate service services/expense
 ng generate service services/loader
 ng generate service services/authentication

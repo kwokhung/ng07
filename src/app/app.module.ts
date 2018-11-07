@@ -26,6 +26,7 @@ import { LoaderService } from './services/loader.service';
 import { AuthenticationService } from './services/authentication.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
+import { ConfigComponent } from './components/config/config.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     DuplicateInvoiceItemComponent,
     ExpenseToBeExportedComponent,
     LoginComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
