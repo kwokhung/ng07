@@ -41,10 +41,6 @@ export class AppComponent implements OnInit {
     this.title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
   }
 
-  configChanged(config: ConfigParameter) {
-    this.title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
-  }
-
   isAuthenticated(): boolean {
     return this.authenticationService.isAuthenticated();
   }
