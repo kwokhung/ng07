@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
   }
 
   configChanged(config: ConfigParameter) {
-    alert(config);
     this.title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
   }
 

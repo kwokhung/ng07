@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+
+import { AppComponent } from '../../app.component';
 
 import { LoaderService } from '../../services/loader.service';
 
@@ -14,8 +16,6 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent implements OnInit {
-
-  @Output() configChanged = new EventEmitter<ConfigParameter>();
 
   title = 'Configuration';
 
@@ -31,7 +31,7 @@ export class ConfigComponent implements OnInit {
     { key: 'Mason Securities Limited', value: 1 }
   ];
 
-  constructor(private router: Router, private loaderService: LoaderService) {
+  constructor(@Inject(forwardRef(() => AppComponent)) private appComponent: AppComponent, private router: Router, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class ConfigComponent implements OnInit {
       environment.expensesUrl = expensesUrl;
     }
 
-    this.configChanged.emit(parameter);
+    this.appComponent.configChanged(parameter);
 
     this.loaderService.hideLoader();
   }
