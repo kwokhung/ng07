@@ -1,60 +1,48 @@
 <div class="card">
-    <div class="card-body">
-      <h1 class="card-title text-center">{{title}}</h1>
-      <div class="text-center">
-        <app-loader>Loading...</app-loader>
+  <div class="card-body">
+    <h1 class="card-title text-center">{{title}}</h1>
+    <div class="text-center">
+      <app-loader>Loading...</app-loader>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form" novalidate [formGroup]="configForm">
+          <div *ngIf="invalidConfig" class="alert alert-danger">Invalid Configuration.</div>
+          <div class="form-group ">
+            <label>Operation Condition</label>
+            <select class="form-control" formControlName="operationCondition">
+              <option *ngFor="let operationCondition of operationConditions" [ngValue]="operationCondition">
+                {{operationCondition.key}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group ">
+            <label>Authentication Url</label>
+            <input type="authenticationUrl" class="form-control" formControlName="authenticationUrl" autocomplete="new-authenticationUrl">
+            <div *ngIf="authenticationUrl.invalid && (authenticationUrl.dirty || authenticationUrl.touched)" class="alert alert-danger">
+              <div *ngIf="authenticationUrl.errors.required">
+                This field is mandatory.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Expenses Url</label>
+            <input type="text" class="form-control" formControlName="expensesUrl">
+            <div *ngIf="expensesUrl.invalid && (expensesUrl.dirty || expensesUrl.touched)" class="alert alert-danger">
+              <div *ngIf="expensesUrl.errors.required">
+                This field is mandatory.
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="config(configForm.value)" [disabled]="!configForm.valid">Save</button>
+        </form>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <form class="form" novalidate [formGroup]="loginForm">
-            <div *ngIf="invalidLogin" class="alert alert-danger">Invalid User Id. or Password.</div>
-            <div class="form-group ">
-              <label>Domain</label>
-              <select class="form-control" formControlName="domain">
-                <option *ngFor="let domain of domains" [ngValue]="domain">
-                  {{domain}}
-                </option>
-              </select>
-            </div>
-            <!--div class="form-group ">
-              <label>Domain</label>
-              <input type="text" class="form-control" formControlName="domain">
-              <div *ngIf="domain.invalid && (domain.dirty || domain.touched)" class="alert alert-danger">
-                <div *ngIf="domain.errors.required">
-                  This field is mandatory.
-                </div>
-                <div *ngIf="domain.errors.regEx">
-                  {{domain.errors.regEx.value}}
-                </div>
-              </div>
-            </div-->
-            <div class="form-group">
-              <label>User Id.</label>
-              <input type="text" class="form-control" formControlName="userId">
-              <div *ngIf="userId.invalid && (userId.dirty || userId.touched)" class="alert alert-danger">
-                <div *ngIf="userId.errors.required">
-                  This field is mandatory.
-                </div>
-              </div>
-            </div>
-            <div class="form-group ">
-              <label>Password</label>
-              <input type="password" class="form-control" formControlName="password" autocomplete="new-password">
-              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-                <div *ngIf="password.errors.required">
-                  This field is mandatory.
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary" (click)="login(loginForm.value)" [disabled]="!loginForm.valid">Login</button>
-          </form>
-        </div>
-        <!--div class="col-md-12">
-          <label>
-            <strong>Login Form</strong>
-          </label>
-          <pre class="alert alert-dark">{{loginForm.value | json}}</pre>
-        </div-->
-      </div>
+      <!--div class="col-md-12">
+        <label>
+          <strong>Config Form</strong>
+        </label>
+        <pre class="alert alert-dark">{{configForm.value | json}}</pre>
+      </div-->
     </div>
   </div>
+</div>

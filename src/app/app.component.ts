@@ -18,6 +18,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    let operationCondition: string = localStorage.getItem("operationCondition");
+
+    if (operationCondition) {
+      environment.operationCondition = +operationCondition;
+    }
+
     let authenticationUrl: string = localStorage.getItem("authenticationUrl");
 
     if (authenticationUrl) {
@@ -28,12 +34,6 @@ export class AppComponent implements OnInit {
 
     if (expensesUrl) {
       environment.expensesUrl = expensesUrl;
-    }
-
-    let operationCondition: string = localStorage.getItem("operationCondition");
-
-    if (operationCondition) {
-      environment.operationCondition = +operationCondition;
     }
   }
 
