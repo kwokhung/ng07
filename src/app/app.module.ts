@@ -20,13 +20,13 @@ import { DuplicateInvoiceComponent } from './components/duplicate-invoice/duplic
 import { DuplicateInvoiceItemComponent } from './components/duplicate-invoice-item/duplicate-invoice-item.component';
 import { ExpenseToBeExportedComponent } from './components/expense-to-be-exported/expense-to-be-exported.component';
 import { LoginComponent } from './components/login/login.component';
+import { ConfigComponent } from './components/config/config.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 import { AuthenticationService } from './services/authentication.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
-import { ConfigComponent } from './components/config/config.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +41,8 @@ import { ConfigComponent } from './components/config/config.component';
     DuplicateInvoiceItemComponent,
     ExpenseToBeExportedComponent,
     LoginComponent,
-    FormatDatePipe,
-    ConfigComponent
+    ConfigComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,
