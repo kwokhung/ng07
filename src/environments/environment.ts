@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  operationCondition: 1,
+  operationCondition: 0,
   authenticationUrl: 'http://localhost:5400/api/ADService',
   //expensesUrl: 'http://localhost:3000/expense',
   expensesUrl: 'http://localhost:5400/api/ExpenseService'

@@ -74,6 +74,7 @@ export class ConfigComponent implements OnInit {
     }
 
     this.appComponent.configChanged(parameter);
+    alert('Configuration is saved.');
 
     this.loaderService.hideLoader();
   }
