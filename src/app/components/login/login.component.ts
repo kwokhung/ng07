@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoaderService } from '../../services/loader.service';
 
-import { LoginParameter } from 'src/app/models/login-parameter';
+import { LoginParameter } from '../../models/login-parameter';
 
 import { environment } from '../../../environments/environment';
 

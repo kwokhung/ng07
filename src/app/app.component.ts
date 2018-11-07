@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from './services/authentication.service';
 
+import { ConfigParameter } from './models/config-parameter';
+
 import { environment } from '../environments/environment';
 
 @Component({
@@ -12,7 +14,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
 
-  title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
+  title = '';
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
@@ -35,6 +37,13 @@ export class AppComponent implements OnInit {
     if (expensesUrl) {
       environment.expensesUrl = expensesUrl;
     }
+
+    this.title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
+  }
+
+  configChanged(config: ConfigParameter) {
+    alert(config);
+    this.title = (environment.operationCondition == 0 ? 'Mason Group' : 'Mason Securities Limited');
   }
 
   isAuthenticated(): boolean {

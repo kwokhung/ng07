@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { LoaderService } from '../../services/loader.service';
 
-import { ConfigParameter } from 'src/app/models/config-parameter';
+import { ConfigParameter } from '../../models/config-parameter';
 
 import { environment } from '../../../environments/environment';
 
@@ -14,6 +14,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent implements OnInit {
+
+  @Output() configChanged = new EventEmitter<ConfigParameter>();
 
   title = 'Configuration';
 
@@ -70,6 +72,8 @@ export class ConfigComponent implements OnInit {
     if (expensesUrl) {
       environment.expensesUrl = expensesUrl;
     }
+
+    this.configChanged.emit(parameter);
 
     this.loaderService.hideLoader();
   }

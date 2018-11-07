@@ -31,5 +31,5 @@
     </div>
 </nav>
 <div class="container container-fluid">
-    <router-outlet></router-outlet>
+    <router-outlet (configChanged)="configChanged($event)" ></router-outlet>
 </div>
