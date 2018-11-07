@@ -21,7 +21,6 @@ import { environment } from '../../environments/environment';
 })
 export class ExpenseService {
 
-  expensesUrl = environment.expensesUrl;
   expenses: Expense[] = [];
   expenseCart: number[] = [];
 
@@ -30,7 +29,7 @@ export class ExpenseService {
   }
 
   getAllExpenses(): Observable<Expense[]> {
-    return this.httpClient.post<any>(`${this.expensesUrl}/getAllExpenses`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/getAllExpenses`, {
       operationCondition: environment.operationCondition
     }, {
         headers: this.authenticationService.addBearer(new HttpHeaders({
@@ -62,7 +61,7 @@ export class ExpenseService {
   getExpenses(parameter: SearchExpenseCriteria): Observable<Expense[]> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/getExpenses`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/getExpenses`, {
       operationCondition: environment.operationCondition,
       applicationDate: (parameter.applicationDate ? parameter.applicationDate.format('YYYYMMDD') : null),
       applicationNo: parameter.applicationNo,
@@ -97,7 +96,7 @@ export class ExpenseService {
   requestToExport(parameter: number[]): Observable<any> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/requestToExport`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/requestToExport`, {
       operationCondition: environment.operationCondition,
       ids: parameter
     }, {
@@ -118,7 +117,7 @@ export class ExpenseService {
   }
 
   getWholeExportList(): Observable<ExportItem[]> {
-    return this.httpClient.post<any>(`${this.expensesUrl}/getWholeExportList`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/getWholeExportList`, {
       operationCondition: environment.operationCondition
     }, {
         headers: this.authenticationService.addBearer(new HttpHeaders({
@@ -141,7 +140,7 @@ export class ExpenseService {
   getExportList(parameter: SearchExportCriteria): Observable<ExportItem[]> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post<any>(`${this.expensesUrl}/getExportList`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/getExportList`, {
       operationCondition: environment.operationCondition,
       date: (parameter.date ? parameter.date.format('YYYYMMDD') : null)
     }, {
@@ -165,7 +164,7 @@ export class ExpenseService {
   getExportItemFile(parameter: DownloadExportCriteria): Observable<Blob> {
     //console.log(`parameter: ${JSON.stringify(parameter)}`);
 
-    return this.httpClient.post(`${this.expensesUrl}/getExportItemFile`, {
+    return this.httpClient.post(`${environment.expensesUrl}/getExportItemFile`, {
       operationCondition: environment.operationCondition,
       date: parameter.date,
       batchNo: parameter.batchNo
@@ -185,7 +184,7 @@ export class ExpenseService {
   }
 
   getAllDuplicateInvoices(): Observable<DuplicateInvoice[]> {
-    return this.httpClient.post<any>(`${this.expensesUrl}/getAllDuplicateInvoices`, {
+    return this.httpClient.post<any>(`${environment.expensesUrl}/getAllDuplicateInvoices`, {
       operationCondition: environment.operationCondition
     }, {
         headers: this.authenticationService.addBearer(new HttpHeaders({
@@ -249,7 +248,7 @@ export class ExpenseService {
     let expenses: Observable<Expense>[] = [];
 
     this.expenseCart.forEach(item => {
-      expenses.push(this.httpClient.post<any>(`${this.expensesUrl}/getExpenseByRequestId`, {
+      expenses.push(this.httpClient.post<any>(`${environment.expensesUrl}/getExpenseByRequestId`, {
         operationCondition: environment.operationCondition,
         id: item
       }, {

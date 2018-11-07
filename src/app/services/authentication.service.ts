@@ -12,8 +12,6 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
 
-  authenticationUrl = environment.authenticationUrl;
-
   constructor(private httpClient: HttpClient) {
   }
 
@@ -23,7 +21,7 @@ export class AuthenticationService {
     //localStorage.setItem('jwt', token);
     //return of(token);
 
-    return this.httpClient.post<any>(`${this.authenticationUrl}/User/Login`, {
+    return this.httpClient.post<any>(`${environment.authenticationUrl}/User/Login`, {
       txtDomain: parameter.domain,
       txtSamAccountName: parameter.userId,
       txtPassword: parameter.password
