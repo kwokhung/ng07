@@ -6,22 +6,25 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
+            <li class="nav-item active" *ngIf="isAuthenticated()">
                 <a class="nav-link" routerLink="/">Expense Voucher Export</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isAuthenticated()">
                 <a class="nav-link" routerLink="/expense-to-be-exported">Expenses To Be Exported</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isAuthenticated()">
                 <a class="nav-link" routerLink="/export-list">Export List</a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated()">
+                <a class="nav-link" routerLink="/duplicate-invoice">Duplicate Invoice</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">More</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" routerLink="/duplicate-invoice">Duplicate Invoice</a>
                     <a class="dropdown-item" routerLink="/config">Configuartion</a>
-                    <a class="dropdown-item" routerLink="/" (click)="logout()" *ngIf="isAuthenticated()">Logout</a>
+                    <a class="dropdown-item" routerLink="/" (click)="login()" *ngIf="!isAuthenticated()">Log In</a>
+                    <a class="dropdown-item" routerLink="/" (click)="logout()" *ngIf="isAuthenticated()">Log Out</a>
                 </div>
             </li>
         </ul>
