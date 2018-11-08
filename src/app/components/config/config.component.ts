@@ -58,7 +58,7 @@ export class ConfigComponent implements OnInit {
     localStorage.setItem('expensesUrl', parameter.expensesUrl);
 
     this.appComponent.ngOnInit();
-    this.messageService.show(this.dialog, 'Configuration is saved.', this.title, '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
+    this.messageService.show(this.dialog, 'Configuration is saved.', '', '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
 
     this.loaderService.hideLoader();
   }

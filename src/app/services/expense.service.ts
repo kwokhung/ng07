@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog } from "@angular/material";
 
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
@@ -13,6 +14,7 @@ import { SearchExportCriteria } from '../models/search-export-criteria';
 import { DownloadExportCriteria } from '../models/download-export-criteria';
 
 import { AuthenticationService } from '../services/authentication.service';
+import { MessageService, MessageBoxButton, MessageBoxStyle } from '../services/message.service';
 
 import { environment } from '../../environments/environment';
 
@@ -24,7 +26,7 @@ export class ExpenseService {
   expenses: Expense[] = [];
   expenseCart: number[] = [];
 
-  constructor(private router: Router, private httpClient: HttpClient, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private httpClient: HttpClient, private authenticationService: AuthenticationService, private messageService: MessageService, private dialog: MatDialog) {
     this.expenses = MockData.expenses;
   }
 
@@ -293,7 +295,7 @@ export class ExpenseService {
 
       if (error.status && error.status === 401) {
         if (error.error && error.error.errMsg) {
-          alert(JSON.stringify(error.error.errMsg));
+          this.messageService.show(this.dialog, error.error.errMsg, '', '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
         }
 
         this.authenticationService.logout();

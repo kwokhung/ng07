@@ -16,7 +16,8 @@ export class SimpleDialogComponent implements OnInit {
   allow_outside_click: boolean;
 
   constructor(public dialogRef: MatDialogRef<SimpleDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(data);
+    //console.log(data);
+    
     this.style = data.style || 0;
     this.title = data.title;
     this.message = data.message;
