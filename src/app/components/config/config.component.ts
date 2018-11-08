@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject, forwardRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { MatDialog } from "@angular/material";
 
 import { AppComponent } from '../../app.component';
 
 import { LoaderService } from '../../services/loader.service';
+import { MessageService, MessageBoxButton, MessageBoxStyle } from '../../services/message.service';
 
 import { ConfigParameter } from '../../models/config-parameter';
 
@@ -31,7 +33,7 @@ export class ConfigComponent implements OnInit {
     { key: 'Mason Securities Limited', value: 1 }
   ];
 
-  constructor(@Inject(forwardRef(() => AppComponent)) private appComponent: AppComponent, private router: Router, private loaderService: LoaderService) {
+  constructor(@Inject(forwardRef(() => AppComponent)) private appComponent: AppComponent, private router: Router, private loaderService: LoaderService, private messageService: MessageService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class ConfigComponent implements OnInit {
     localStorage.setItem('expensesUrl', parameter.expensesUrl);
 
     this.appComponent.ngOnInit();
-    alert('Configuration is saved.');
+    this.messageService.show(this.dialog, 'Configuration is saved.', this.title, '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
 
     this.loaderService.hideLoader();
   }

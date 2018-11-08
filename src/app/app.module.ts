@@ -3,11 +3,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatCardModule } from "@angular/material/card";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatDialogModule, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -21,10 +24,12 @@ import { DuplicateInvoiceItemComponent } from './components/duplicate-invoice-it
 import { ExpenseToBeExportedComponent } from './components/expense-to-be-exported/expense-to-be-exported.component';
 import { LoginComponent } from './components/login/login.component';
 import { ConfigComponent } from './components/config/config.component';
+import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
 
 import { ExpenseService } from './services/expense.service';
 import { LoaderService } from './services/loader.service';
 import { AuthenticationService } from './services/authentication.service';
+import { MessageService } from './services/message.service';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
 
@@ -42,7 +47,11 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     ExpenseToBeExportedComponent,
     LoginComponent,
     ConfigComponent,
+    SimpleDialogComponent,
     FormatDatePipe
+  ],
+  entryComponents: [
+    SimpleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,12 +62,16 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatDialogModule,
     HttpClientModule
   ],
   providers: [
     ExpenseService,
     LoaderService,
     AuthenticationService,
+    MessageService,
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -77,7 +90,11 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
           monthYearA11yLabel: 'MMMM YYYY',
         }
       }
-    }
+    },
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {}
+    },
   ],
   bootstrap: [AppComponent]
 })
