@@ -5,6 +5,10 @@ div.message {
     padding-bottom: 0px;
 }
 
+div.message p {
+    margin: 0;
+}
+
 div.info {
     padding-left: 25px;
     padding-right: 25px;
