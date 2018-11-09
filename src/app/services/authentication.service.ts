@@ -50,8 +50,8 @@ export class AuthenticationService {
   }
 
   refreshToken(data: any) {
-    if (data.content.refreshtoken) {
-      localStorage.setItem('jwt', data.content.refreshtoken);
+    if (data.content.refreshToken) {
+      localStorage.setItem('jwt', data.content.refreshToken);
     }
   }
 
