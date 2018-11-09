@@ -298,8 +298,10 @@ export class ExpenseService {
           this.messageService.show(this.dialog, error.error.errMsg, '', '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
         }
 
-        //this.authenticationService.logout();
-        //this.router.navigateByUrl('/login');
+        if (error.error.errCode !== '9xxxx4' || error.error.errMsg !== 'No access right.') {
+          this.authenticationService.logout();
+          this.router.navigateByUrl('/login');
+        }
       }
 
       return of(result as T);
