@@ -11,9 +11,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-electron": "ng build --base-href ./ && electron .",
+    "build-electron": "ng build --base-href ./",
     "package-electron": "ng build --base-href ./ && electron-builder build --windows --config electron/builder.yaml",
-    "build-electron-aot": "ng build --base-href ./ --prod && electron .",
+    "build-electron-aot": "ng build --base-href ./ --prod",
     "package-electron-aot": "ng build --base-href ./ --prod && electron-builder build --windows --config electron/builder.yaml",
     "electron": "electron ."
   },
