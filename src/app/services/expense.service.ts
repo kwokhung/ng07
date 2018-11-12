@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatDialog } from "@angular/material";
 
 import { Expense } from '../models/expense';
 import { ExportItem } from '../models/export-item';
@@ -26,7 +25,7 @@ export class ExpenseService {
   expenses: Expense[] = [];
   expenseCart: number[] = [];
 
-  constructor(private router: Router, private httpClient: HttpClient, private authenticationService: AuthenticationService, private messageService: MessageService, private dialog: MatDialog) {
+  constructor(private router: Router, private httpClient: HttpClient, private authenticationService: AuthenticationService, private messageService: MessageService) {
     this.expenses = MockData.expenses;
   }
 
@@ -295,7 +294,7 @@ export class ExpenseService {
 
       if (error.status && error.status === 401) {
         if (error.error && error.error.errMsg) {
-          this.messageService.show(this.dialog, error.error.errMsg, '', '', MessageBoxButton.None, true, MessageBoxStyle.Simple, "400px");
+          this.messageService.sendMessage(error.error.errMsg, MessageBoxStyle.Simple);
         }
 
         if (error.error.errCode !== '9xxxx4' || error.error.errMsg !== 'No access right.') {

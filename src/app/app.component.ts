@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from "rxjs";
+import { MatDialog } from "@angular/material";
 
+import { MessageService, MessageBoxButton, MessageBoxStyle } from './services/message.service';
 import { AuthenticationService } from './services/authentication.service';
-
-import { ConfigParameter } from './models/config-parameter';
 
 import { environment } from '../environments/environment';
 
@@ -15,8 +16,12 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit {
 
   title = '';
+  subscriber: Subscription;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private authenticationService: AuthenticationService, private messageService: MessageService, private dialog: MatDialog) {
+    this.subscriber = this.messageService.getMessage().subscribe(message => {
+      this.messageService.show(this.dialog, message.text, '', '', MessageBoxButton.None, true, message.type, "400px");
+    });
   }
 
   ngOnInit() {
